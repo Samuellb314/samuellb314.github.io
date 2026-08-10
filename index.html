@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repórter Ofertas — Notícias e Achados</title>
+    <meta name="description" content="Repórter Ofertas: notícias do dia com recomendações de produtos e ofertas selecionadas.">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #0d0d0d;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+
+        a { color: inherit; }
+
+        /* CABEÇALHO DO SITE */
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 60;
+            background: rgba(13,13,13,.96);
+            border-bottom: 1px solid #222;
+            backdrop-filter: blur(8px);
+        }
+        .site-header-topo {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 15px;
+            gap: 10px;
+        }
+        .site-logo {
+            font-size: 20px;
+            font-weight: bold;
+            letter-spacing: .3px;
+        }
+        .site-logo span { color: #ffd54a; }
+        .site-nav {
+            display: flex;
+            gap: 14px;
+            padding: 0 15px 12px;
+            overflow-x: auto;
+            font-size: 13px;
+        }
+        .site-nav a {
+            white-space: nowrap;
+            text-decoration: none;
+            color: #aaa;
+            padding: 6px 10px;
+            border-radius: 20px;
+            background: #1a1a1a;
+        }
+        .site-nav a:hover { color: #fff; background: #222; }
+
+        /* PERFIL DO USUÁRIO */
+        .perfil-avatar {
+            width: 38px;
+            height: 38px;
+            min-width: 38px;
+            border-radius: 50%;
+            background: #222;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            overflow: hidden;
+        }
+        .perfil-btn {
+            border: none;
+            border-radius: 9px;
+            padding: 9px 12px;
+            background: #222;
+            color: #fff;
+            cursor: pointer;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .perfil-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background: rgba(0,0,0,.75);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .perfil-modal.aberto { display: flex; }
+        .perfil-caixa {
+            width: 100%;
+            max-width: 420px;
+            background: #141414;
+            border: 1px solid #2b2b2b;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 15px 50px rgba(0,0,0,.5);
+        }
+        .perfil-cabecalho { display:flex; align-items:center; justify-content:space-between; margin-bottom: 18px; }
+        .perfil-cabecalho h2 { font-size: 20px; }
+        .perfil-fechar { border: none; background: transparent; color:#aaa; font-size:24px; cursor:pointer; }
+        .perfil-form { display:flex; flex-direction:column; gap:10px; }
+        .perfil-form label { color:#aaa; font-size:12px; }
+        .perfil-form input, .perfil-form textarea {
+            width:100%; padding:12px; border:none; border-radius:9px; background:#222; color:#fff; outline:none;
+        }
+        .perfil-form textarea { min-height:80px; resize:vertical; }
+        .perfil-salvar { border:none; border-radius:9px; padding:12px; background:#ffd54a; color:#000; font-weight:bold; cursor:pointer; margin-top:5px; }
+        .perfil-dica { color:#777; font-size:11px; line-height:1.4; }
+
+        /* FEED */
+        .feed {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 16px 12px 40px;
+        }
+
+        /* CARD DE NOTÍCIA */
+        .post-card {
+            background: #151515;
+            border: 1px solid #232323;
+            border-radius: 14px;
+            overflow: hidden;
+            margin-bottom: 22px;
+        }
+
+        .post-capa {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #1e1e1e;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #555;
+            font-size: 13px;
+            text-align: center;
+            overflow: hidden;
+        }
+        .post-capa img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none; /* remova essa linha quando colocar uma imagem real no src */
+        }
+        .post-categoria {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: #ffd54a;
+            color: #000;
+            font-size: 11px;
+            font-weight: bold;
+            padding: 4px 10px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+        }
+
+        .info { padding: 16px 15px 8px; }
+        .info h2 { font-size: 19px; line-height: 1.3; margin-bottom: 8px; }
+        .info .post-meta { color: #777; font-size: 12px; margin-bottom: 10px; }
+        .info p.post-texto { color: #ccc; font-size: 14.5px; line-height: 1.55; }
+
+        /* BLOCO DE AFILIADO */
+        .afiliado-bloco {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            margin: 14px 15px;
+            padding: 12px;
+            background: #1c1c1c;
+            border: 1px solid #2a2a2a;
+            border-radius: 12px;
+        }
+        .afiliado-imagem {
+            width: 64px;
+            height: 64px;
+            min-width: 64px;
+            border-radius: 8px;
+            background: #262626;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            color: #555;
+        }
+        .afiliado-detalhes { flex: 1; min-width: 0; }
+        .afiliado-nome { font-size: 14px; font-weight: bold; margin-bottom: 2px; }
+        .afiliado-preco { font-size: 13px; color: #9ae6b4; display: block; margin-bottom: 8px; }
+        .afiliado-btn {
+            display: inline-block;
+            background: #ffd54a;
+            color: #000;
+            font-weight: bold;
+            font-size: 13px;
+            padding: 8px 14px;
+            border-radius: 8px;
+            text-decoration: none;
+        }
+        .afiliado-btn:hover { background: #ffe27a; }
+
+        .afiliado-aviso {
+            margin: 0 15px 12px;
+            font-size: 11.5px;
+            color: #777;
+            line-height: 1.4;
+        }
+
+        /* AÇÕES */
+        .acoes {
+            display: flex;
+            gap: 12px;
+            padding: 6px 15px 15px;
+        }
+        .acao {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            border: none;
+            background: #222;
+            color: #fff;
+            padding: 10px 14px;
+            border-radius: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: transform 0.15s;
+        }
+        .acao:active { transform: scale(0.9); }
+
+        .curtir.ativo { background: #3a1118; }
+        .curtir .coracao { transition: transform 0.2s; }
+        .curtir.ativo .coracao { transform: scale(1.25); }
+
+        .contador,
+        .contador-comentarios { font-size: 14px; color: #ccc; }
+
+        /* COMENTÁRIOS */
+        .comentarios { display: none; padding: 0 15px 20px; }
+        .comentarios.aberto { display: block; }
+
+        .campo-comentario {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+        .campo-comentario input {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: #222;
+            color: #fff;
+            outline: none;
+        }
+        .campo-comentario input::placeholder { color: #888; }
+        .campo-comentario button {
+            border: none;
+            border-radius: 8px;
+            padding: 12px;
+            background: #ffd54a;
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .lista-comentarios { display: flex; flex-direction: column; gap: 10px; }
+
+        .comentario {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            background: #1b1b1b;
+            padding: 10px;
+            border-radius: 10px;
+            word-break: break-word;
+        }
+        .avatar-comentario {
+            width: 38px;
+            height: 38px;
+            min-width: 38px;
+            border-radius: 50%;
+            background: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+        .conteudo-comentario { flex: 1; }
+        .nome-comentario { font-weight: bold; font-size: 14px; margin-bottom: 4px; }
+        .texto-comentario { color: #ddd; font-size: 14px; }
+        .hora-comentario { color: #777; font-size: 11px; margin-top: 5px; }
+        .sem-comentarios { color: #777; font-size: 14px; }
+
+        .acoes-comentario {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 8px;
+        }
+        .botao-curtir-comentario {
+            border: none; background: transparent; color: #888; cursor: pointer; padding: 3px; font-size: 13px;
+        }
+        .botao-curtir-comentario.ativo { color: #fff; }
+        .botao-curtir-comentario:active { transform: scale(0.9); }
+
+        .botao-responder {
+            border: none; background: transparent; color: #888; cursor: pointer; font-size: 13px; padding: 3px;
+        }
+        .botao-responder:hover { color: #fff; }
+
+        .botao-excluir {
+            border: none; background: transparent; color: #888; cursor: pointer; font-size: 13px; padding: 3px;
+        }
+        .botao-excluir:hover { color: #f66; }
+
+        .campo-resposta { display: none; margin-top: 8px; gap: 6px; }
+        .campo-resposta.aberto { display: flex; }
+        .campo-resposta input {
+            flex: 1; min-width: 0; padding: 8px; border: none; border-radius: 7px; background: #222; color: #fff; outline: none;
+        }
+        .botao-publicar-resposta {
+            border: none; border-radius: 7px; padding: 8px 10px; background: #ffd54a; color: #000; font-weight: bold; cursor: pointer;
+        }
+
+        .resposta-nivel { margin-top:8px; padding-left:10px; border-left:2px solid #333; }
+        .resposta-acoes { display:flex; align-items:center; gap:8px; margin-top:5px; }
+        .resposta-btn { border:none; background:transparent; color:#888; cursor:pointer; font-size:12px; padding:2px; }
+        .resposta-btn:hover { color:#fff; }
+        .campo-resposta-nivel { display:none; gap:6px; margin-top:6px; }
+        .campo-resposta-nivel.aberto { display:flex; }
+        .campo-resposta-nivel input { flex:1; min-width:0; padding:7px; border:none; border-radius:6px; background:#1b1b1b; color:#fff; outline:none; }
+        .campo-resposta-nivel button { border:none; border-radius:6px; padding:7px 9px; background:#ffd54a; color:#000; font-weight:bold; cursor:pointer; }
+
+        /* RODAPÉ */
+        .site-footer {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 20px 15px 40px;
+            color: #666;
+            font-size: 12px;
+            line-height: 1.6;
+            border-top: 1px solid #1e1e1e;
+        }
+        .site-footer a {
+            color: #999;
+            text-decoration: underline;
+            margin-right: 12px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- CABEÇALHO -->
+    <header class="site-header">
+        <div class="site-header-topo">
+            <div class="site-logo">Repórter<span>Ofertas</span></div>
+            <button type="button" class="perfil-btn" onclick="abrirPerfil()" aria-label="Abrir perfil">
+                <span class="perfil-avatar" id="perfilAvatarTopo">👤</span>
+                <span id="perfilNomeTopo">Perfil</span>
+            </button>
+        </div>
+        <nav class="site-nav">
+            <a href="#">Início</a>
+            <a href="#">[Tecnologia]</a>
+            <a href="#">[Esportes]</a>
+            <a href="#">[Economia]</a>
+            <a href="#">[Entretenimento]</a>
+        </nav>
+    </header>
+
+    <div class="perfil-modal" id="perfilModal" onclick="fecharPerfilFora(event)">
+        <div class="perfil-caixa">
+            <div class="perfil-cabecalho">
+                <h2>Meu perfil</h2>
+                <button type="button" class="perfil-fechar" onclick="fecharPerfil()" aria-label="Fechar">×</button>
+            </div>
+            <div class="perfil-form">
+                <label for="perfilNomeInput">Nome</label>
+                <input id="perfilNomeInput" type="text" maxlength="30" placeholder="Seu nome">
+
+                <label for="perfilBioInput">Bio</label>
+                <textarea id="perfilBioInput" maxlength="120" placeholder="Fale um pouco sobre você"></textarea>
+
+                <label for="perfilAvatarInput">Avatar (emoji)</label>
+                <input id="perfilAvatarInput" type="text" maxlength="4" placeholder="👤">
+
+                <div class="perfil-dica">Seu perfil é salvo neste dispositivo. O nome será usado automaticamente quando você comentar.</div>
+                <button type="button" class="perfil-salvar" onclick="salvarPerfil()">Salvar perfil</button>
+            </div>
+        </div>
+    </div>
+
+    <main class="feed">
+
+        <!-- NOTÍCIA 1 -->
+        <article class="post-card" data-post-id="post-1">
+            <div class="post-capa">
+                <span class="post-categoria">Esportes</span>
+                <img src="imagens/produto-tenis-running.png" alt="Tênis de corrida preto e branco" style="display:block;">
+            </div>
+            <div class="info">
+                <h2>Procura por tênis de corrida leves cresce entre iniciantes</h2>
+                <div class="post-meta">Esportes · Ofertas · 2 min de leitura</div>
+                <p class="post-texto">
+                    Com a chegada de mais gente à corrida de rua nos últimos meses, cresce também a procura por
+                    tênis de entrada que equilibrem conforto, leveza e um preço mais acessível. Modelos com cabedal
+                    respirável e entressola macia têm sido os mais buscados por quem está começando a treinar,
+                    já que ajudam a reduzir o impacto nas primeiras semanas de corrida sem pesar no bolso.
+                    Separamos abaixo uma opção que se encaixa nesse perfil.
+                </p>
+            </div>
+
+            <div class="afiliado-bloco">
+                <img class="afiliado-imagem" src="imagens/produto-tenis-running.png" alt="Tênis de corrida preto e branco" style="object-fit:cover;">
+                <div class="afiliado-detalhes">
+                    <div class="afiliado-nome">Tênis de Corrida Running Preto e Branco</div>
+                    <span class="afiliado-preco">Ver preço atualizado no Mercado Livre</span>
+                    <a class="afiliado-btn" href="https://meli.la/29zLyw4" target="_blank" rel="nofollow sponsored noopener">Ver oferta →</a>
+                </div>
+            </div>
+            <div class="afiliado-aviso">💡 Este post contém link de afiliado. Podemos ganhar uma comissão sobre compras feitas através dele, sem custo adicional para você.</div>
+
+            <div class="acoes">
+                <button class="acao curtir" onclick="curtir(this)" aria-label="Curtir">
+                    <span class="coracao">❤️</span>
+                    <span class="contador">0</span>
+                </button>
+                <button class="acao" onclick="abrirComentarios(this)" aria-label="Comentários">
+                    💬
+                    <span class="contador-comentarios">0</span>
+                </button>
+                <button class="acao" onclick="compartilhar(this)" aria-label="Compartilhar">↗️</button>
+            </div>
+
+            <div class="comentarios">
+                <div class="campo-comentario">
+                    <input type="text" class="nome-usuario" placeholder="Seu nome" maxlength="30">
+                    <input type="text" class="texto-comentario-input" placeholder="Escreva um comentário..." maxlength="200">
+                    <button type="button" onclick="publicarComentario(this)">Publicar</button>
+                </div>
+                <div class="lista-comentarios">
+                    <div class="sem-comentarios">Nenhum comentário ainda.</div>
+                </div>
+            </div>
+        </article>
+
+        <!-- NOTÍCIA 2 (duplique este bloco inteiro para cada nova notícia, trocando data-post-id="post-3", "post-4"...) -->
+        <article class="post-card" data-post-id="post-2">
+            <div class="post-capa">
+                <span class="post-categoria">[Esportes]</span>
+                <img src="[URL_DA_IMAGEM_DA_NOTICIA]" alt="[Descrição da imagem]">
+                📷 [Espaço para imagem de capa da notícia]
+            </div>
+            <div class="info">
+                <h2>[Título da segunda notícia]</h2>
+                <div class="post-meta">[Categoria] · [Data] · [Tempo de leitura]</div>
+                <p class="post-texto">
+                    [Texto original da notícia aqui.]
+                </p>
+            </div>
+
+            <div class="afiliado-bloco">
+                <div class="afiliado-imagem">🛒</div>
+                <div class="afiliado-detalhes">
+                    <div class="afiliado-nome">[Nome do produto relacionado]</div>
+                    <span class="afiliado-preco">[R$ 000,00]</span>
+                    <a class="afiliado-btn" href="[SEU_LINK_DE_AFILIADO_AQUI]" target="_blank" rel="nofollow sponsored noopener">Ver oferta →</a>
+                </div>
+            </div>
+            <div class="afiliado-aviso">💡 Este post contém link de afiliado. Podemos ganhar uma comissão sobre compras feitas através dele, sem custo adicional para você.</div>
+
+            <div class="acoes">
+                <button class="acao curtir" onclick="curtir(this)" aria-label="Curtir">
+                    <span class="coracao">❤️</span>
+                    <span class="contador">0</span>
+                </button>
+                <button class="acao" onclick="abrirComentarios(this)" aria-label="Comentários">
+                    💬
+                    <span class="contador-comentarios">0</span>
+                </button>
+                <button class="acao" onclick="compartilhar(this)" aria-label="Compartilhar">↗️</button>
+            </div>
+
+            <div class="comentarios">
+                <div class="campo-comentario">
+                    <input type="text" class="nome-usuario" placeholder="Seu nome" maxlength="30">
+                    <input type="text" class="texto-comentario-input" placeholder="Escreva um comentário..." maxlength="200">
+                    <button type="button" onclick="publicarComentario(this)">Publicar</button>
+                </div>
+                <div class="lista-comentarios">
+                    <div class="sem-comentarios">Nenhum comentário ainda.</div>
+                </div>
+            </div>
+        </article>
+
+    </main>
+
+    <footer class="site-footer">
+        <div style="margin-bottom:10px;">
+            <a href="#">Sobre</a>
+            <a href="#">Contato</a>
+            <a href="#">Política de Privacidade</a>
+            <a href="#">Termos de Uso</a>
+        </div>
+        <p>© 2026 Repórter Ofertas. Todos os direitos reservados.</p>
+        <p style="margin-top:6px;">Este site participa de programas de afiliados. Alguns links neste site podem gerar comissão em caso de compra, sem custo adicional para o leitor.</p>
+    </footer>
+
+<script>
+(function () {
+    "use strict";
+
+    var STORAGE_KEY = "siteDadosPosts";
+    var PROFILE_KEY = "sitePerfilUsuario";
+
+    function gerarId(prefixo) {
+        return prefixo + "-" + Date.now() + "-" + Math.random().toString(36).slice(2, 8);
+    }
+
+    function carregarDados() {
+        try {
+            return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+        } catch (e) {
+            console.error("Erro ao ler localStorage:", e);
+            return {};
+        }
+    }
+
+    function salvarDados(dados) {
+        try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(dados));
+        } catch (e) {
+            console.error("Erro ao salvar localStorage:", e);
+        }
+    }
+
+    function getPostId(card) {
+        return card.getAttribute("data-post-id");
+    }
+
+    function garantirPost(dados, postId) {
+        if (!dados[postId]) {
+            dados[postId] = { curtido: false, curtidas: 0, comentarios: [] };
+        }
+        if (!Array.isArray(dados[postId].comentarios)) {
+            dados[postId].comentarios = [];
+        }
+        return dados[postId];
+    }
+
+    window.curtir = function (botao) {
+        var card = botao.closest(".post-card");
+        if (!card) return;
+
+        var postId = getPostId(card);
+        var dados = carregarDados();
+        var post = garantirPost(dados, postId);
+
+        post.curtido = !post.curtido;
+        post.curtidas = Math.max(0, (post.curtidas || 0) + (post.curtido ? 1 : -1));
+
+        botao.classList.toggle("ativo", post.curtido);
+        var contador = botao.querySelector(".contador");
+        if (contador) contador.textContent = post.curtidas;
+
+        salvarDados(dados);
+    };
+
+    window.abrirComentarios = function (botao) {
+        var card = botao.closest(".post-card");
+        if (!card) return;
+
+        var area = card.querySelector(".comentarios");
+        if (!area) return;
+
+        area.classList.toggle("aberto");
+
+        if (area.classList.contains("aberto")) {
+            var nome = area.querySelector(".nome-usuario");
+            if (nome) nome.focus();
+        }
+    };
+
+    window.publicarComentario = function (botao) {
+        var card = botao.closest(".post-card");
+        if (!card) return;
+
+        var area = card.querySelector(".comentarios");
+        var nomeInput = area.querySelector(".nome-usuario");
+        var textoInput = area.querySelector(".texto-comentario-input");
+
+        var perfil = carregarPerfil();
+        var nome = (nomeInput.value.trim() || perfil.nome || "").trim();
+        var texto = textoInput.value.trim();
+
+        if (!nome) {
+            alert("Digite seu nome.");
+            nomeInput.focus();
+            return;
+        }
+
+        if (!texto) {
+            alert("Digite um comentário.");
+            textoInput.focus();
+            return;
+        }
+
+        var postId = getPostId(card);
+        var dados = carregarDados();
+        var post = garantirPost(dados, postId);
+
+        post.comentarios.push({
+            id: gerarId("comentario"),
+            nome: nome,
+            texto: texto,
+            data: new Date().toLocaleString("pt-BR"),
+            curtidas: 0,
+            curtido: false,
+            respostas: [],
+            avatar: perfil.avatar || "👤"
+        });
+
+        salvarDados(dados);
+        textoInput.value = "";
+
+        renderizarComentarios(card);
+    };
+
+    function atualizarContador(card) {
+        var postId = getPostId(card);
+        var dados = carregarDados();
+        var post = garantirPost(dados, postId);
+        var contador = card.querySelector(".contador-comentarios");
+        if (contador) contador.textContent = post.comentarios.length;
+    }
+
+    function renderizarComentarios(card) {
+        var postId = getPostId(card);
+        var dados = carregarDados();
+        var post = garantirPost(dados, postId);
+        var lista = card.querySelector(".lista-comentarios");
+        if (!lista) return;
+
+        lista.innerHTML = "";
+
+        if (post.comentarios.length === 0) {
+            var vazio = document.createElement("div");
+            vazio.className = "sem-comentarios";
+            vazio.textContent = "Nenhum comentário ainda.";
+            lista.appendChild(vazio);
+        } else {
+            post.comentarios.forEach(function (comentario) {
+                criarComentario(card, lista, comentario);
+            });
+        }
+
+        atualizarContador(card);
+    }
+
+    function criarComentario(card, lista, comentario) {
+        var elemento = document.createElement("div");
+        elemento.className = "comentario";
+        elemento.setAttribute("data-comment-id", comentario.id);
+
+        var avatar = document.createElement("div");
+        avatar.className = "avatar-comentario";
+        avatar.textContent = comentario.avatar || "👤";
+
+        var conteudo = document.createElement("div");
+        conteudo.className = "conteudo-comentario";
+
+        var nome = document.createElement("div");
+        nome.className = "nome-comentario";
+        nome.textContent = comentario.nome;
+
+        var texto = document.createElement("div");
+        texto.className = "texto-comentario";
+        texto.textContent = comentario.texto;
+
+        var hora = document.createElement("div");
+        hora.className = "hora-comentario";
+        hora.textContent = comentario.data;
+
+        conteudo.appendChild(nome);
+        conteudo.appendChild(texto);
+        conteudo.appendChild(hora);
+        conteudo.appendChild(criarAcoesComentario(card, comentario, false));
+
+        var respostasContainer = document.createElement("div");
+        respostasContainer.className = "respostas-container";
+        renderizarRespostas(card, comentario, respostasContainer, 1);
+        conteudo.appendChild(respostasContainer);
+
+        elemento.appendChild(avatar);
+        elemento.appendChild(conteudo);
+        lista.appendChild(elemento);
+    }
+
+    function localizarItem(lista, id) {
+        if (!Array.isArray(lista)) return null;
+        for (var i = 0; i < lista.length; i++) {
+            if (lista[i].id === id) return lista[i];
+            var encontrado = localizarItem(lista[i].respostas, id);
+            if (encontrado) return encontrado;
+        }
+        return null;
+    }
+
+    function removerItem(lista, id) {
+        if (!Array.isArray(lista)) return false;
+        for (var i = 0; i < lista.length; i++) {
+            if (lista[i].id === id) {
+                lista.splice(i, 1);
+                return true;
+            }
+            if (removerItem(lista[i].respostas, id)) return true;
+        }
+        return false;
+    }
+
+    function criarAcoesComentario(card, alvo, eResposta) {
+        var wrapper = document.createElement("div");
+        var botoes = document.createElement("div");
+        botoes.className = eResposta ? "resposta-acoes" : "acoes-comentario";
+
+        var curtirBtn = document.createElement("button");
+        curtirBtn.type = "button";
+        curtirBtn.className = eResposta ? "resposta-btn" : "botao-curtir-comentario";
+        curtirBtn.textContent = "❤️ " + (alvo.curtidas || 0);
+        if (alvo.curtido) curtirBtn.classList.add("ativo");
+
+        curtirBtn.onclick = function () {
+            var dados = carregarDados();
+            var post = garantirPost(dados, getPostId(card));
+            var encontrado = localizarItem(post.comentarios, alvo.id);
+            if (!encontrado) return;
+            encontrado.curtido = !encontrado.curtido;
+            encontrado.curtidas = Math.max(0, (encontrado.curtidas || 0) + (encontrado.curtido ? 1 : -1));
+            salvarDados(dados);
+            renderizarComentarios(card);
+        };
+
+        var responderBtn = document.createElement("button");
+        responderBtn.type = "button";
+        responderBtn.className = eResposta ? "resposta-btn" : "botao-responder";
+        responderBtn.textContent = "↩️ Responder";
+
+        var excluirBtn = document.createElement("button");
+        excluirBtn.type = "button";
+        excluirBtn.className = "botao-excluir";
+        excluirBtn.textContent = "🗑️";
+        excluirBtn.setAttribute("aria-label", "Excluir");
+        excluirBtn.onclick = function () {
+            var mensagem = eResposta
+                ? "Excluir esta resposta?"
+                : "Excluir este comentário e todas as respostas dele?";
+            if (!confirm(mensagem)) return;
+
+            var dados = carregarDados();
+            var post = garantirPost(dados, getPostId(card));
+            removerItem(post.comentarios, alvo.id);
+            salvarDados(dados);
+            renderizarComentarios(card);
+        };
+
+        var campo = document.createElement("div");
+        campo.className = eResposta ? "campo-resposta-nivel" : "campo-resposta";
+
+        var input = document.createElement("input");
+        input.type = "text";
+        input.maxLength = 200;
+        input.placeholder = "Responder a " + alvo.nome + "...";
+
+        var publicar = document.createElement("button");
+        publicar.type = "button";
+        publicar.className = eResposta ? "resposta-btn" : "botao-publicar-resposta";
+        publicar.textContent = "Publicar";
+
+        responderBtn.onclick = function () {
+            campo.classList.toggle("aberto");
+            if (campo.classList.contains("aberto")) input.focus();
+        };
+
+        publicar.onclick = function () {
+            var textoResposta = input.value.trim();
+            if (!textoResposta) { alert("Digite uma resposta."); input.focus(); return; }
+
+            var dados = carregarDados();
+            var post = garantirPost(dados, getPostId(card));
+            var pai = localizarItem(post.comentarios, alvo.id);
+            if (!pai) return;
+            if (!Array.isArray(pai.respostas)) pai.respostas = [];
+
+            var perfil = carregarPerfil();
+            pai.respostas.push({
+                id: gerarId("resposta"),
+                comentarioId: pai.id,
+                nome: perfil.nome || "Você",
+                avatar: perfil.avatar || "👤",
+                texto: textoResposta,
+                data: new Date().toLocaleString("pt-BR"),
+                curtidas: 0,
+                curtido: false,
+                respostas: []
+            });
+
+            salvarDados(dados);
+            input.value = "";
+            campo.classList.remove("aberto");
+            renderizarComentarios(card);
+        };
+
+        botoes.appendChild(curtirBtn);
+        botoes.appendChild(responderBtn);
+        botoes.appendChild(excluirBtn);
+        campo.appendChild(input);
+        campo.appendChild(publicar);
+        wrapper.appendChild(botoes);
+        wrapper.appendChild(campo);
+        return wrapper;
+    }
+
+    function renderizarRespostas(card, pai, container, nivel) {
+        var respostas = Array.isArray(pai.respostas) ? pai.respostas : [];
+        respostas.forEach(function (resposta) {
+            var bloco = document.createElement("div");
+            bloco.className = "resposta-nivel";
+            bloco.setAttribute("data-comment-id", resposta.id);
+            bloco.style.marginLeft = Math.min(nivel * 18, 90) + "px";
+
+            var linha = document.createElement("div");
+            var avatar = document.createElement("span");
+            avatar.textContent = (resposta.avatar || "👤") + " ";
+            var nome = document.createElement("strong");
+            nome.textContent = resposta.nome + ": ";
+            var texto = document.createElement("span");
+            texto.textContent = resposta.texto;
+            linha.appendChild(avatar);
+            linha.appendChild(nome);
+            linha.appendChild(texto);
+
+            var data = document.createElement("div");
+            data.className = "hora-comentario";
+            data.textContent = resposta.data;
+
+            bloco.appendChild(linha);
+            bloco.appendChild(data);
+            bloco.appendChild(criarAcoesComentario(card, resposta, true));
+
+            var filhos = document.createElement("div");
+            filhos.className = "respostas-container";
+            renderizarRespostas(card, resposta, filhos, nivel + 1);
+            bloco.appendChild(filhos);
+            container.appendChild(bloco);
+        });
+    }
+
+    window.compartilhar = function (botao) {
+        var card = botao ? botao.closest(".post-card") : null;
+        var titulo = "Repórter Ofertas";
+
+        if (card) {
+            var h2 = card.querySelector("h2");
+            if (h2) titulo = h2.textContent.trim();
+        }
+
+        var dados = { title: titulo, text: "Confira essa notícia!", url: window.location.href };
+
+        if (navigator.share) {
+            navigator.share(dados).catch(function (e) {
+                console.log("Compartilhamento cancelado.", e);
+            });
+        } else if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(window.location.href)
+                .then(function () { alert("📋 Link copiado!"); })
+                .catch(function () { alert("Não foi possível copiar o link."); });
+        } else {
+            alert(window.location.href);
+        }
+    };
+
+    function carregarPerfil() {
+        try {
+            return JSON.parse(localStorage.getItem(PROFILE_KEY)) || { nome: "", bio: "", avatar: "👤" };
+        } catch (e) {
+            return { nome: "", bio: "", avatar: "👤" };
+        }
+    }
+
+    function atualizarPerfilNaTela() {
+        var perfil = carregarPerfil();
+        var nome = perfil.nome || "Perfil";
+        var avatar = perfil.avatar || "👤";
+
+        var nomeTopo = document.getElementById("perfilNomeTopo");
+        var avatarTopo = document.getElementById("perfilAvatarTopo");
+
+        if (nomeTopo) nomeTopo.textContent = nome;
+        if (avatarTopo) avatarTopo.textContent = avatar;
+
+        document.querySelectorAll(".nome-usuario").forEach(function (input) {
+            if (perfil.nome && !input.value) input.value = perfil.nome;
+            input.placeholder = perfil.nome ? "Seu nome (do perfil)" : "Seu nome";
+        });
+    }
+
+    window.abrirPerfil = function () {
+        var perfil = carregarPerfil();
+        document.getElementById("perfilNomeInput").value = perfil.nome || "";
+        document.getElementById("perfilBioInput").value = perfil.bio || "";
+        document.getElementById("perfilAvatarInput").value = perfil.avatar || "👤";
+        document.getElementById("perfilModal").classList.add("aberto");
+        document.getElementById("perfilNomeInput").focus();
+    };
+
+    window.fecharPerfil = function () {
+        document.getElementById("perfilModal").classList.remove("aberto");
+    };
+
+    window.fecharPerfilFora = function (event) {
+        if (event.target.id === "perfilModal") fecharPerfil();
+    };
+
+    window.salvarPerfil = function () {
+        var nome = document.getElementById("perfilNomeInput").value.trim();
+        var bio = document.getElementById("perfilBioInput").value.trim();
+        var avatar = document.getElementById("perfilAvatarInput").value.trim() || "👤";
+
+        if (!nome) {
+            alert("Digite seu nome.");
+            document.getElementById("perfilNomeInput").focus();
+            return;
+        }
+
+        localStorage.setItem(PROFILE_KEY, JSON.stringify({ nome: nome, bio: bio, avatar: avatar }));
+        atualizarPerfilNaTela();
+        fecharPerfil();
+    };
+
+    function iniciar() {
+        atualizarPerfilNaTela();
+
+        var cards = document.querySelectorAll(".post-card");
+        var dados = carregarDados();
+
+        cards.forEach(function (card, indice) {
+            if (!card.getAttribute("data-post-id")) {
+                card.setAttribute("data-post-id", "post-" + (indice + 1));
+            }
+
+            var postId = getPostId(card);
+            var post = garantirPost(dados, postId);
+
+            var curtirBtn = card.querySelector(".curtir");
+            var contador = curtirBtn ? curtirBtn.querySelector(".contador") : null;
+
+            if (curtirBtn) curtirBtn.classList.toggle("ativo", post.curtido);
+            if (contador) contador.textContent = post.curtidas;
+
+            renderizarComentarios(card);
+        });
+
+        salvarDados(dados);
+    }
+
+    document.addEventListener("DOMContentLoaded", iniciar);
+})();
+</script>
+
+</body>
+</html>
