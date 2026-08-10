@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Política de Privacidade — Repórter Ofertas</title>
+    <meta name="description" content="Política de Privacidade do Repórter Ofertas: como coletamos, usamos e protegemos seus dados.">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background: #0d0d0d; color: #fff; font-family: Arial, sans-serif; }
+        a { color: #ffd54a; }
+
+        .site-header {
+            position: sticky; top: 0; z-index: 60;
+            background: rgba(13,13,13,.96);
+            border-bottom: 1px solid #222;
+            backdrop-filter: blur(8px);
+        }
+        .site-header-topo {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 12px 15px; gap: 10px; max-width: 640px; margin: 0 auto;
+        }
+        .site-logo { font-size: 20px; font-weight: bold; letter-spacing: .3px; }
+        .site-logo span { color: #ffd54a; }
+        .voltar {
+            font-size: 13px; text-decoration: none; color: #aaa;
+            padding: 8px 12px; border-radius: 20px; background: #1a1a1a;
+        }
+        .voltar:hover { color: #fff; background: #222; }
+
+        .conteudo {
+            max-width: 640px; margin: 0 auto; padding: 30px 15px 50px;
+        }
+        .conteudo h1 { font-size: 26px; margin-bottom: 6px; }
+        .conteudo .atualizado { color: #777; font-size: 12.5px; margin-bottom: 25px; }
+        .conteudo h2 { font-size: 18px; margin: 24px 0 10px; color: #ffd54a; }
+        .conteudo p, .conteudo li { color: #ccc; font-size: 14.5px; line-height: 1.65; margin-bottom: 10px; }
+        .conteudo ul { padding-left: 20px; margin-bottom: 10px; }
+
+        .site-footer {
+            max-width: 640px; margin: 0 auto; padding: 20px 15px 40px;
+            color: #666; font-size: 12px; line-height: 1.6; border-top: 1px solid #1e1e1e;
+        }
+        .site-footer a { color: #999; text-decoration: underline; margin-right: 12px; }
+    </style>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="site-header-topo">
+            <div class="site-logo">Repórter<span>Ofertas</span></div>
+            <a class="voltar" href="index.html">← Voltar ao início</a>
+        </div>
+    </header>
+
+    <main class="conteudo">
+        <h1>Política de Privacidade</h1>
+        <div class="atualizado">Última atualização: 9 de agosto de 2026</div>
+
+        <p>
+            Esta Política de Privacidade explica como o Repórter Ofertas coleta, usa e protege as
+            informações dos visitantes deste site. Ao utilizar o site, você concorda com as práticas
+            descritas aqui.
+        </p>
+
+        <h2>1. Quais informações coletamos</h2>
+        <p>
+            Quando você utiliza a área de comentários ou personaliza seu perfil, algumas informações
+            ficam salvas diretamente no seu próprio navegador (por meio do recurso "localStorage"),
+            incluindo:
+        </p>
+        <ul>
+            <li>Nome informado no perfil ou nos comentários</li>
+            <li>Bio e emoji de avatar escolhidos, se preenchidos</li>
+            <li>Textos dos comentários e respostas publicados</li>
+            <li>Curtidas registradas nos posts e comentários</li>
+        </ul>
+        <p>
+            Esses dados não são enviados para nenhum servidor nosso: eles permanecem armazenados
+            localmente no dispositivo que você está usando para acessar o site. Se você limpar os
+            dados do navegador ou acessar de outro dispositivo, essas informações não estarão mais
+            disponíveis.
+        </p>
+
+        <h2>2. Cookies e tecnologias de rastreamento</h2>
+        <p>
+            Este site pode utilizar cookies e tecnologias semelhantes para melhorar a experiência de
+            navegação, lembrar preferências e, quando aplicável, exibir publicidade relevante através
+            de parceiros como o Google AdSense. O Google pode usar cookies para veicular anúncios com
+            base em visitas anteriores do usuário a este ou a outros sites.
+        </p>
+        <p>
+            Você pode desativar o uso de cookies personalizados de publicidade visitando as
+            <a href="https://adssettings.google.com" target="_blank" rel="noopener">Configurações de Anúncios do Google</a>.
+        </p>
+
+        <h2>3. Links de afiliados</h2>
+        <p>
+            O Repórter Ofertas participa de programas de afiliados, incluindo o programa de afiliados
+            do Mercado Livre. Isso significa que alguns links neste site direcionam para lojas parceiras
+            e podem gerar uma comissão para nós em caso de compra, sem qualquer custo adicional para
+            você. A escolha e a avaliação dos produtos recomendados são feitas de forma independente.
+        </p>
+
+        <h2>4. Publicidade de terceiros</h2>
+        <p>
+            Este site pode exibir anúncios fornecidos por redes de publicidade de terceiros, como o
+            Google AdSense. Essas empresas podem utilizar informações sobre suas visitas a este e a
+            outros sites para fornecer anúncios sobre produtos e serviços de seu interesse.
+        </p>
+
+        <h2>5. Compartilhamento de dados</h2>
+        <p>
+            Não vendemos, alugamos ou compartilhamos dados pessoais dos visitantes com terceiros para
+            fins de marketing próprio. Como os dados de perfil e comentários ficam armazenados apenas
+            no navegador do usuário, não temos acesso centralizado a esse conteúdo.
+        </p>
+
+        <h2>6. Seus direitos</h2>
+        <p>
+            Você pode, a qualquer momento, apagar os dados salvos localmente no seu navegador por meio
+            das configurações do próprio navegador (limpar dados de navegação/armazenamento do site) ou
+            excluindo manualmente seus comentários pelo botão de exclusão disponível em cada comentário.
+        </p>
+
+        <h2>7. Alterações nesta política</h2>
+        <p>
+            Esta Política de Privacidade pode ser atualizada periodicamente para refletir mudanças em
+            nossas práticas ou por motivos legais. Recomendamos revisitar esta página regularmente.
+        </p>
+
+        <h2>8. Contato</h2>
+        <p>
+            Em caso de dúvidas sobre esta Política de Privacidade, entre em contato através da nossa
+            <a href="contato.html">página de Contato</a>.
+        </p>
+    </main>
+
+    <footer class="site-footer">
+        <div style="margin-bottom:10px;">
+            <a href="sobre.html">Sobre</a>
+            <a href="contato.html">Contato</a>
+            <a href="privacidade.html">Política de Privacidade</a>
+        </div>
+        <p>© 2026 Repórter Ofertas. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>
