@@ -361,6 +361,47 @@
             margin-right: 12px;
         }
 
+        /* FAIXA: LOCAL, DATA, HORA E VERSÍCULO */
+        .faixa-info {
+            background: #141414;
+            border-bottom: 1px solid #222;
+            padding: 8px 15px;
+            font-size: 12.5px;
+            color: #ccc;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 6px 10px;
+        }
+        .faixa-info .local-data-hora {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 6px 8px;
+            font-weight: 600;
+            color: #ffd54a;
+            white-space: nowrap;
+        }
+        .faixa-info .separador {
+            color: #555;
+        }
+        .faixa-info .versiculo {
+            color: #bbb;
+            font-style: italic;
+            flex: 1 1 260px;
+        }
+        .faixa-info .versiculo .ref {
+            color: #ffd54a;
+            font-style: normal;
+            font-weight: 600;
+        }
+        @media (max-width: 480px) {
+            .faixa-info {
+                font-size: 11.5px;
+                padding: 7px 12px;
+            }
+        }
+
         /* BOTÕES FLUTUANTES (WhatsApp + Instagram) */
         .botoes-flutuantes {
             position: fixed;
@@ -435,6 +476,14 @@
             <a href="https://br.ign.com" target="_blank" rel="noopener">Entretenimento ↗</a>
         </nav>
     </header>
+
+    <!-- FAIXA: LOCAL, DATA, HORA E VERSÍCULO -->
+    <div class="faixa-info">
+        <span class="local-data-hora">
+            📍 Sumaré, SP <span class="separador">•</span> <span id="dataAtual"></span> <span class="separador">•</span> <span id="horaAtual"></span>
+        </span>
+        <span class="versiculo" id="versiculoDia"></span>
+    </div>
 
     <div class="perfil-modal" id="perfilModal" onclick="fecharPerfilFora(event)">
         <div class="perfil-caixa">
@@ -1609,6 +1658,49 @@ Além de bonitos, os panos são ótimos para o dia a dia. Você pode usar para s
     }
 
     document.addEventListener("DOMContentLoaded", iniciar);
+})();
+</script>
+
+<script>
+(function () {
+    "use strict";
+
+    var elData = document.getElementById("dataAtual");
+    var elHora = document.getElementById("horaAtual");
+    var elVersiculo = document.getElementById("versiculoDia");
+
+    var MESES = ["janeiro", "fevereiro", "março", "abril", "maio", "junho",
+        "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"];
+
+    var VERSICULOS = [
+        { texto: "O Senhor é o meu pastor; nada me faltará.", ref: "Salmos 23:1" },
+        { texto: "Tudo posso naquele que me fortalece.", ref: "Filipenses 4:13" },
+        { texto: "Confia no Senhor de todo o teu coração.", ref: "Provérbios 3:5" },
+        { texto: "O Senhor é a minha luz e a minha salvação.", ref: "Salmos 27:1" },
+        { texto: "Alegrai-vos sempre no Senhor.", ref: "Filipenses 4:4" },
+        { texto: "O Senhor te abençoe, e te guarde.", ref: "Números 6:24" },
+        { texto: "Este é o dia que fez o Senhor; alegremo-nos.", ref: "Salmos 118:24" }
+    ];
+
+    function atualizarDataHora() {
+        var agora = new Date();
+        elData.textContent = agora.getDate() + " de " + MESES[agora.getMonth()] + " de " + agora.getFullYear();
+        elHora.textContent = agora.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+    }
+
+    function atualizarVersiculo() {
+        var diaDoAno = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / 86400000);
+        var v = VERSICULOS[diaDoAno % VERSICULOS.length];
+        elVersiculo.innerHTML = '"' + v.texto + '" <span class="ref">— ' + v.ref + '</span>';
+    }
+
+    if (elData && elHora) {
+        atualizarDataHora();
+        setInterval(atualizarDataHora, 1000);
+    }
+    if (elVersiculo) {
+        atualizarVersiculo();
+    }
 })();
 </script>
 
