@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Repórter Ofertas — Notícias e Achados</title>
     <meta name="description" content="Repórter Ofertas: notícias do dia com recomendações de produtos e ofertas selecionadas.">
+    <meta name="google-adsense-account" content="ca-pub-9865739637958097">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9865739637958097"
      crossorigin="anonymous"></script>
     <style>
@@ -369,7 +370,6 @@
         <div class="site-header-topo">
             <div class="site-logo">Repórter<span>Ofertas</span></div>
             <button type="button" class="perfil-btn" onclick="abrirPerfil()" aria-label="Abrir perfil">
-                <span class="perfil-avatar" id="perfilAvatarTopo">👤</span>
                 <span id="perfilNomeTopo">Perfil</span>
             </button>
         </div>
@@ -1440,13 +1440,9 @@
     function atualizarPerfilNaTela() {
         var perfil = carregarPerfil();
         var nome = perfil.nome || "Perfil";
-        var avatar = perfil.avatar || "👤";
 
         var nomeTopo = document.getElementById("perfilNomeTopo");
-        var avatarTopo = document.getElementById("perfilAvatarTopo");
-
         if (nomeTopo) nomeTopo.textContent = nome;
-        if (avatarTopo) avatarTopo.textContent = avatar;
 
         document.querySelectorAll(".nome-usuario").forEach(function (input) {
             if (perfil.nome && !input.value) input.value = perfil.nome;
