@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato — Repórter Ofertas</title>
+    <meta name="description" content="Entre em contato com o Repórter Ofertas.">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background: #0d0d0d; color: #fff; font-family: Arial, sans-serif; }
+        a { color: #ffd54a; }
+
+        .site-header {
+            position: sticky; top: 0; z-index: 60;
+            background: rgba(13,13,13,.96);
+            border-bottom: 1px solid #222;
+            backdrop-filter: blur(8px);
+        }
+        .site-header-topo {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 12px 15px; gap: 10px; max-width: 640px; margin: 0 auto;
+        }
+        .site-logo { font-size: 20px; font-weight: bold; letter-spacing: .3px; }
+        .site-logo span { color: #ffd54a; }
+        .voltar {
+            font-size: 13px; text-decoration: none; color: #aaa;
+            padding: 8px 12px; border-radius: 20px; background: #1a1a1a;
+        }
+        .voltar:hover { color: #fff; background: #222; }
+
+        .conteudo {
+            max-width: 640px; margin: 0 auto; padding: 30px 15px 50px;
+        }
+        .conteudo h1 { font-size: 26px; margin-bottom: 10px; }
+        .conteudo p { color: #ccc; font-size: 14.5px; line-height: 1.65; margin-bottom: 20px; }
+
+        .contato-caixa {
+            background: #151515; border: 1px solid #232323; border-radius: 14px;
+            padding: 20px; margin-bottom: 20px;
+        }
+        .contato-caixa h2 { font-size: 16px; margin-bottom: 6px; color: #ffd54a; }
+        .contato-caixa p { margin-bottom: 0; font-size: 14px; }
+        .contato-email {
+            display: inline-block; margin-top: 8px; font-weight: bold; text-decoration: none;
+        }
+
+        .site-footer {
+            max-width: 640px; margin: 0 auto; padding: 20px 15px 40px;
+            color: #666; font-size: 12px; line-height: 1.6; border-top: 1px solid #1e1e1e;
+        }
+        .site-footer a { color: #999; text-decoration: underline; margin-right: 12px; }
+    </style>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="site-header-topo">
+            <div class="site-logo">Repórter<span>Ofertas</span></div>
+            <a class="voltar" href="index.html">← Voltar ao início</a>
+        </div>
+    </header>
+
+    <main class="conteudo">
+        <h1>Contato</h1>
+        <p>
+            Tem alguma dúvida, sugestão de pauta, ou quer relatar um problema com um link ou produto
+            indicado no site? Fale com a gente pelo e-mail abaixo.
+        </p>
+
+        <div class="contato-caixa">
+            <h2>E-mail</h2>
+            <p>Respondemos o mais rápido possível, geralmente em até 2 dias úteis.</p>
+            <a class="contato-email" href="mailto:reporteofertas@gmail.com">reporteofertas@gmail.com</a>
+        </div>
+
+        <div class="contato-caixa">
+            <h2>Anunciantes e parcerias</h2>
+            <p>
+                Se você representa uma marca ou loja e tem interesse em parcerias de conteúdo,
+                envie um e-mail para o endereço acima com o assunto "Parceria".
+            </p>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div style="margin-bottom:10px;">
+            <a href="sobre.html">Sobre</a>
+            <a href="contato.html">Contato</a>
+            <a href="privacidade.html">Política de Privacidade</a>
+        </div>
+        <p>© 2026 Repórter Ofertas. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>
