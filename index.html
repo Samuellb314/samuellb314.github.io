@@ -288,6 +288,89 @@
             line-height: 1.4;
         }
 
+        /* BLOCO ESPECIAL - CONVITE IFOOD ENTREGADOR */
+        .ifood-capa {
+            background: linear-gradient(135deg, #EA1D2C 0%, #b3121d 100%);
+            font-size: 54px;
+        }
+        .post-categoria.categoria-ifood { background: #ffffff; color: #EA1D2C; }
+        .ifood-selo {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(0,0,0,.35);
+            color: #fff;
+            font-size: 11px;
+            font-weight: bold;
+            padding: 4px 10px;
+            border-radius: 20px;
+        }
+        .ifood-beneficios {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+            margin: 4px 15px 4px;
+        }
+        .ifood-beneficios li {
+            font-size: 14px;
+            color: #ddd;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+        .ifood-codigo-box {
+            margin: 14px 15px 10px;
+            border: 2px dashed #EA1D2C;
+            border-radius: 12px;
+            padding: 12px 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            background: #1c1010;
+        }
+        .ifood-codigo-info { min-width: 0; }
+        .ifood-codigo-label {
+            font-size: 11px;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            margin-bottom: 3px;
+        }
+        .ifood-codigo-valor {
+            font-size: 19px;
+            font-weight: bold;
+            color: #ffd54a;
+            letter-spacing: 1px;
+        }
+        .ifood-copiar-btn {
+            border: none;
+            border-radius: 8px;
+            padding: 10px 14px;
+            background: #EA1D2C;
+            color: #fff;
+            font-weight: bold;
+            font-size: 12.5px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .ifood-copiar-btn:hover { background: #ff2d3d; }
+        .ifood-copiar-btn.copiado { background: #2e7d32; }
+        .ifood-cta-btn {
+            display: block;
+            text-align: center;
+            margin: 4px 15px 14px;
+            background: #EA1D2C;
+            color: #fff;
+            font-weight: bold;
+            font-size: 15px;
+            padding: 14px;
+            border-radius: 10px;
+            text-decoration: none;
+        }
+        .ifood-cta-btn:hover { background: #ff2d3d; }
+
         /* AÇÕES */
         .acoes {
             display: flex;
@@ -620,6 +703,72 @@
         <div class="lista-comentarios"><div class="sem-comentarios">Nenhum comentário ainda.</div></div>
     </div>
 </article>
+
+        <!-- CONVITE IFOOD ENTREGADOR -->
+        <article class="post-card" data-post-id="post-ifood-entregador">
+            <div class="post-capa ifood-capa" style="position:relative; display:flex;">
+                🏍️
+                <span class="post-categoria categoria-ifood">OPORTUNIDADE</span>
+                <span class="ifood-selo">Vagas abertas</span>
+            </div>
+            <div class="info">
+                <h2>Quer ganhar uma renda extra no seu tempo livre? O iFood está chamando entregadores! 🏍️💰</h2>
+                <div class="post-meta">Oportunidades · Divulgação · 1 min de leitura</div>
+                <p class="post-texto">
+                    Você define os horários, escolhe como vai entregar (moto, bike ou a pé) e recebe
+                    seus ganhos direto na conta. É uma forma rápida de complementar a renda ou até
+                    fazer da entrega o seu trabalho principal. O cadastro é gratuito e leva poucos
+                    minutos — use o código de indicação abaixo e comece ainda essa semana. ❤️
+                </p>
+            </div>
+
+            <ul class="ifood-beneficios">
+                <li>🕒 Você escolhe os dias e horários que quer trabalhar</li>
+                <li>💳 Saques rápidos e ganhos direto no seu celular</li>
+                <li>🚲 Pode começar de bike, moto ou a pé</li>
+                <li>📱 Cadastro 100% pelo app, sem burocracia</li>
+            </ul>
+
+            <div class="ifood-codigo-box">
+                <div class="ifood-codigo-info">
+                    <div class="ifood-codigo-label">Código de indicação</div>
+                    <div class="ifood-codigo-valor" id="ifood-codigo-texto">BRG462DG</div>
+                </div>
+                <button type="button" class="ifood-copiar-btn" onclick="copiarCodigoIfood(this)">Copiar código</button>
+            </div>
+
+            <a class="ifood-cta-btn" href="https://ifoodentregadores.onelink.me/cSI0/dgd" target="_blank" rel="nofollow sponsored noopener">
+                Quero me cadastrar agora →
+            </a>
+
+            <div class="afiliado-aviso">
+                🤝 Convite para cadastro de novos entregadores parceiros iFood. Ao usar o código
+                acima, a indicação é vinculada a quem compartilhou este link.
+            </div>
+
+            <div class="acoes">
+                <button class="acao curtir" onclick="curtir(this)" aria-label="Curtir">
+                    <span class="coracao">❤️</span>
+                    <span class="contador">0</span>
+                </button>
+                <button class="acao" onclick="abrirComentarios(this)" aria-label="Comentários">
+                    💬
+                    <span class="contador-comentarios">0</span>
+                </button>
+                <button class="acao" onclick="compartilhar(this)" aria-label="Compartilhar">↗️</button>
+            </div>
+
+            <div class="comentarios">
+                <div class="campo-comentario">
+                    <input type="text" class="nome-usuario" placeholder="Seu nome" maxlength="30">
+                    <input type="text" class="texto-comentario-input" placeholder="Escreva um comentário..." maxlength="200">
+                    <button type="button" onclick="publicarComentario(this)">Publicar</button>
+                </div>
+                <div class="lista-comentarios">
+                    <div class="sem-comentarios">Nenhum comentário ainda.</div>
+                </div>
+            </div>
+        </article>
 
         <!-- NOTÍCIA 1 -->
         <article class="post-card" data-post-id="post-1">
@@ -1671,6 +1820,28 @@ Além de bonitos, os panos são ótimos para o dia a dia. Você pode usar para s
                 .catch(function () { alert("Não foi possível copiar o link."); });
         } else {
             alert(window.location.href);
+        }
+    };
+
+    window.copiarCodigoIfood = function (botao) {
+        var codigo = "BRG462DG";
+        var textoOriginal = botao.textContent;
+
+        function marcarCopiado() {
+            botao.textContent = "Copiado! ✅";
+            botao.classList.add("copiado");
+            setTimeout(function () {
+                botao.textContent = textoOriginal;
+                botao.classList.remove("copiado");
+            }, 2000);
+        }
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(codigo).then(marcarCopiado).catch(function () {
+                alert("Código: " + codigo);
+            });
+        } else {
+            alert("Código: " + codigo);
         }
     };
 
