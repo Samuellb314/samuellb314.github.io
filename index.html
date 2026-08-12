@@ -155,6 +155,75 @@
             object-fit: cover;
             display: none; /* remova essa linha quando colocar uma imagem real no src */
         }
+
+        /* CARROSSEL DE IMAGENS (arrastar/deslizar esquerda-direita) */
+        .post-capa-carrossel {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        .post-capa-carrossel::-webkit-scrollbar { display: none; }
+        .post-capa-slide {
+            flex: 0 0 100%;
+            width: 100%;
+            height: 100%;
+            scroll-snap-align: start;
+        }
+        .post-capa-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .carrossel-seta {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: rgba(0,0,0,.55);
+            color: #fff;
+            border: none;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 3;
+        }
+        .carrossel-seta:hover { background: rgba(0,0,0,.8); }
+        .carrossel-seta.esquerda { left: 10px; }
+        .carrossel-seta.direita { right: 10px; }
+        .carrossel-pontos {
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            z-index: 3;
+        }
+        .carrossel-ponto {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(255,255,255,.4);
+            transition: background .15s ease, transform .15s ease;
+        }
+        .carrossel-ponto.ativo {
+            background: #ffd54a;
+            transform: scale(1.2);
+        }
+        @media (max-width: 480px) {
+            .carrossel-seta { display: none; } /* no celular o gesto de arrastar já resolve */
+        }
         .post-categoria {
             position: absolute;
             top: 12px;
@@ -554,28 +623,56 @@
 
         <!-- NOTÍCIA 1 -->
         <article class="post-card" data-post-id="post-1">
-            <div class="post-capa">
+            <div class="post-capa" style="position:relative;">
                 <span class="post-categoria">Esportes</span>
-                <img src="imagens/produto-tenis-running.png" alt="Tênis de corrida preto e branco" style="display:block;">
+                <div class="post-capa-carrossel">
+                    <div class="post-capa-slide">
+                        <img src="imagens/tenis-carbono-1.jpg" alt="Tênis de corrida com placa de carbono, cor bege e laranja">
+                    </div>
+                    <div class="post-capa-slide">
+                        <img src="imagens/tenis-carbono-2.jpg" alt="Tênis de corrida com placa de carbono, cor branca e azul">
+                    </div>
+                    <div class="post-capa-slide">
+                        <img src="imagens/tenis-carbono-3.jpg" alt="Tênis de corrida com placa de carbono, cor coral">
+                    </div>
+                    <div class="post-capa-slide">
+                        <img src="imagens/tenis-carbono-4.jpg" alt="Tênis de corrida com placa de carbono, cor verde neon">
+                    </div>
+                    <div class="post-capa-slide">
+                        <img src="imagens/tenis-carbono-5.jpg" alt="Tênis de corrida com placa de carbono sendo usado, cor coral">
+                    </div>
+                    <div class="post-capa-slide">
+                        <img src="imagens/tenis-carbono-6.jpg" alt="Tênis de corrida com placa de carbono sendo usado, cor bege e laranja">
+                    </div>
+                </div>
+                <button type="button" class="carrossel-seta esquerda" aria-label="Imagem anterior">‹</button>
+                <button type="button" class="carrossel-seta direita" aria-label="Próxima imagem">›</button>
+                <div class="carrossel-pontos">
+                    <span class="carrossel-ponto ativo"></span>
+                    <span class="carrossel-ponto"></span>
+                    <span class="carrossel-ponto"></span>
+                    <span class="carrossel-ponto"></span>
+                    <span class="carrossel-ponto"></span>
+                    <span class="carrossel-ponto"></span>
+                </div>
             </div>
             <div class="info">
-                <h2>Procura por tênis de corrida leves cresce entre iniciantes</h2>
+                <h2>Tênis com placa de carbono ganha espaço entre corredores</h2>
                 <div class="post-meta">Esportes · Ofertas · 2 min de leitura</div>
                 <p class="post-texto">
-                    Com a chegada de mais gente à corrida de rua nos últimos meses, cresce também a procura por
-                    tênis de entrada que equilibrem conforto, leveza e um preço mais acessível. Modelos com cabedal
-                    respirável e entressola macia têm sido os mais buscados por quem está começando a treinar,
-                    já que ajudam a reduzir o impacto nas primeiras semanas de corrida sem pesar no bolso.
-                    Separamos abaixo uma opção que se encaixa nesse perfil.
+                    A tecnologia de placa de carbono, antes restrita a modelos de alta performance, começou a
+                    aparecer em opções mais acessíveis — prometendo mais retorno de energia a cada passada e
+                    menos fadiga em treinos longos. O modelo unissex, disponível do 33 ao 44, une essa proposta
+                    a um visual esportivo moderno. Confira abaixo os detalhes e onde encontrar.
                 </p>
             </div>
 
             <div class="afiliado-bloco">
-                <img class="afiliado-imagem" src="imagens/produto-tenis-running.png" alt="Tênis de corrida preto e branco" style="object-fit:cover;">
+                <img class="afiliado-imagem" src="imagens/tenis-carbono-1.jpg" alt="Tênis de corrida com placa de carbono" style="object-fit:cover;">
                 <div class="afiliado-detalhes">
-                    <div class="afiliado-nome">Tênis de Corrida Running Preto e Branco</div>
-                    <span class="afiliado-preco">Ver preço atualizado no Mercado Livre</span>
-                    <a class="afiliado-btn" href="https://meli.la/29zLyw4" target="_blank" rel="nofollow sponsored noopener">Ver oferta →</a>
+                    <div class="afiliado-nome">Tênis Placa de Carbono Profissional — Unissex 33-44</div>
+                    <span class="afiliado-preco">Ver preço atualizado na Shopee</span>
+                    <a class="afiliado-btn" href="https://s.shopee.com.br/2qTiTJ8vkC" target="_blank" rel="nofollow sponsored noopener">Ver oferta →</a>
                 </div>
             </div>
             <div class="afiliado-aviso">💡 Este post contém link de afiliado. Podemos ganhar uma comissão sobre compras feitas através dele, sem custo adicional para você.</div>
@@ -1701,6 +1798,53 @@ Além de bonitos, os panos são ótimos para o dia a dia. Você pode usar para s
     if (elVersiculo) {
         atualizarVersiculo();
     }
+})();
+</script>
+
+<script>
+(function () {
+    "use strict";
+
+    function iniciarCarrossel(carrossel) {
+        var pontos = carrossel.parentElement.querySelectorAll(".carrossel-ponto");
+        var setaEsq = carrossel.parentElement.querySelector(".carrossel-seta.esquerda");
+        var setaDir = carrossel.parentElement.querySelector(".carrossel-seta.direita");
+        var totalSlides = carrossel.children.length;
+
+        function irParaSlide(indice) {
+            carrossel.scrollTo({ left: carrossel.clientWidth * indice, behavior: "smooth" });
+        }
+
+        function atualizarPontoAtivo() {
+            var indice = Math.round(carrossel.scrollLeft / carrossel.clientWidth);
+            pontos.forEach(function (ponto, i) {
+                ponto.classList.toggle("ativo", i === indice);
+            });
+        }
+
+        carrossel.addEventListener("scroll", function () {
+            window.requestAnimationFrame(atualizarPontoAtivo);
+        });
+
+        if (setaEsq) {
+            setaEsq.addEventListener("click", function () {
+                var atual = Math.round(carrossel.scrollLeft / carrossel.clientWidth);
+                irParaSlide(Math.max(0, atual - 1));
+            });
+        }
+        if (setaDir) {
+            setaDir.addEventListener("click", function () {
+                var atual = Math.round(carrossel.scrollLeft / carrossel.clientWidth);
+                irParaSlide(Math.min(totalSlides - 1, atual + 1));
+            });
+        }
+
+        atualizarPontoAtivo();
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll(".post-capa-carrossel").forEach(iniciarCarrossel);
+    });
 })();
 </script>
 
