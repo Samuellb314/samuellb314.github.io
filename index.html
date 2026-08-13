@@ -127,6 +127,45 @@
             padding: 16px 12px 40px;
         }
 
+        /* CARREGAMENTO PROGRESSIVO (evita rolagem gigante ao abrir o site) */
+        .post-card.oculto-inicial { display: none; }
+
+        .carregar-mais-wrap {
+            display: flex;
+            justify-content: center;
+            padding: 4px 0 28px;
+        }
+        .btn-carregar-mais {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid #2b2b2b;
+            background: #171717;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 12px 22px;
+            border-radius: 999px;
+            cursor: pointer;
+            transition: background .15s ease, transform .15s ease, border-color .15s ease;
+        }
+        .btn-carregar-mais:hover { background: #1f1f1f; border-color: #3a3a3a; }
+        .btn-carregar-mais:active { transform: scale(.97); }
+        .btn-carregar-mais .seta-baixo {
+            transition: transform .2s ease;
+        }
+        .btn-carregar-mais.carregando .seta-baixo {
+            animation: girar-suave 0.8s linear infinite;
+        }
+        @keyframes girar-suave {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .contador-restantes {
+            color: #888;
+            font-weight: 400;
+        }
+
         /* CARD DE NOTÍCIA */
         .post-card {
             background: #151515;
@@ -1331,6 +1370,13 @@ Além de bonitos, os panos são ótimos para o dia a dia. Você pode usar para s
             </div>
         </article>
 
+        <div class="carregar-mais-wrap" id="carregarMaisWrap">
+            <button type="button" class="btn-carregar-mais" id="btnCarregarMais" onclick="carregarMaisPosts()">
+                Ver mais notícias <span class="contador-restantes" id="contadorRestantes"></span>
+                <span class="seta-baixo">↓</span>
+            </button>
+        </div>
+
     </main>
 
     <footer class="site-footer">
@@ -1889,6 +1935,62 @@ Além de bonitos, os panos são ótimos para o dia a dia. Você pode usar para s
     });
 })();
 </script>
+
+    <script>
+    (function () {
+        "use strict";
+
+        // Quantos cards já aparecem quando o cliente abre o site,
+        // e quantos a mais surgem a cada clique em "Ver mais".
+        var VISIVEIS_NO_INICIO = 5;
+        var CARREGAR_POR_VEZ = 5;
+
+        function iniciarCarregamentoProgressivo() {
+            var cards = Array.prototype.slice.call(document.querySelectorAll(".feed > .post-card"));
+            var wrap = document.getElementById("carregarMaisWrap");
+            var contador = document.getElementById("contadorRestantes");
+
+            if (cards.length <= VISIVEIS_NO_INICIO) {
+                if (wrap) wrap.style.display = "none";
+                return;
+            }
+
+            cards.forEach(function (card, indice) {
+                if (indice >= VISIVEIS_NO_INICIO) {
+                    card.classList.add("oculto-inicial");
+                }
+            });
+
+            function atualizarContador() {
+                var restantes = cards.filter(function (c) {
+                    return c.classList.contains("oculto-inicial");
+                }).length;
+
+                if (restantes <= 0) {
+                    if (wrap) wrap.style.display = "none";
+                    return;
+                }
+                if (contador) contador.textContent = "(" + restantes + ")";
+            }
+
+            window.carregarMaisPosts = function () {
+                var ocultos = cards.filter(function (c) {
+                    return c.classList.contains("oculto-inicial");
+                });
+
+                ocultos.slice(0, CARREGAR_POR_VEZ).forEach(function (card) {
+                    card.classList.remove("oculto-inicial");
+                });
+
+                atualizarContador();
+            };
+
+            atualizarContador();
+        }
+
+        document.addEventListener("DOMContentLoaded", iniciarCarregamentoProgressivo);
+    })();
+    </script>
 
     <!-- BOTÕES FLUTUANTES: WHATSAPP + INSTAGRAM -->
     <div class="botoes-flutuantes">
