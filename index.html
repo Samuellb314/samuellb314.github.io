@@ -375,6 +375,35 @@
             outline: none;
         }
         .campo-comentario input::placeholder { color: #888; }
+        .comentando-como {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: #999;
+            background: #1a1a1a;
+            border: 1px solid #262626;
+            border-radius: 8px;
+            padding: 8px 10px;
+        }
+        .comentando-como .cc-rotulo { color: #777; }
+        .comentando-como .cc-avatar-inline { font-size: 14px; }
+        .comentando-como .cc-nome-inline { color: #fff; font-weight: 600; }
+        .comentando-como .cc-trocar {
+            margin-left: auto;
+            border: none;
+            background: transparent;
+            color: #ffd54a;
+            font-size: 11.5px;
+            cursor: pointer;
+            padding: 2px 4px;
+        }
+        .status-conexao {
+            text-align: center;
+            font-size: 11.5px;
+            color: #777;
+            padding: 6px 15px 0;
+        }
         .campo-comentario button {
             border: none;
             border-radius: 8px;
@@ -592,6 +621,7 @@
         </span>
         <span class="versiculo" id="versiculoDia"></span>
     </div>
+    <div class="status-conexao"></div>
 
     <div class="perfil-modal" id="perfilModal" onclick="fecharPerfilFora(event)">
         <div class="perfil-caixa">
@@ -609,7 +639,7 @@
                 <label for="perfilAvatarInput">Avatar (emoji)</label>
                 <input id="perfilAvatarInput" type="text" maxlength="4" placeholder="👤">
 
-                <div class="perfil-dica">Seu perfil é salvo neste dispositivo. O nome será usado automaticamente quando você comentar.</div>
+                <div class="perfil-dica">Seu perfil fica salvo na nuvem, vinculado a este navegador. O nome e avatar serão usados automaticamente quando você comentar ou curtir.</div>
                 <button type="button" class="perfil-salvar" onclick="salvarPerfil()">Salvar perfil</button>
             </div>
         </div>
@@ -652,7 +682,7 @@
     </div>
     <div class="comentarios">
         <div class="campo-comentario">
-            <input type="text" class="nome-usuario" placeholder="Seu nome" maxlength="30">
+            <div class="comentando-como"><span class="cc-rotulo">Comentando como</span> <span class="cc-avatar-inline"></span><span class="cc-nome-inline">Leitor</span> <button type="button" class="cc-trocar" onclick="abrirPerfil()">trocar</button></div>
             <input type="text" class="texto-comentario-input" placeholder="Escreva um comentário..." maxlength="200">
             <button type="button" onclick="publicarComentario(this)">Publicar</button>
         </div>
@@ -694,7 +724,7 @@
     </div>
     <div class="comentarios">
         <div class="campo-comentario">
-            <input type="text" class="nome-usuario" placeholder="Seu nome" maxlength="30">
+            <div class="comentando-como"><span class="cc-rotulo">Comentando como</span> <span class="cc-avatar-inline"></span><span class="cc-nome-inline">Leitor</span> <button type="button" class="cc-trocar" onclick="abrirPerfil()">trocar</button></div>
             <input type="text" class="texto-comentario-input" placeholder="Escreva um comentário..." maxlength="200">
             <button type="button" onclick="publicarComentario(this)">Publicar</button>
         </div>
@@ -768,7 +798,7 @@
     </div>
     <div class="comentarios">
         <div class="campo-comentario">
-            <input type="text" class="nome-usuario" placeholder="Seu nome" maxlength="30">
+            <div class="comentando-como"><span class="cc-rotulo">Comentando como</span> <span class="cc-avatar-inline"></span><span class="cc-nome-inline">Leitor</span> <button type="button" class="cc-trocar" onclick="abrirPerfil()">trocar</button></div>
             <input type="text" class="texto-comentario-input" placeholder="Escreva um comentário..." maxlength="200">
             <button type="button" onclick="publicarComentario(this)">Publicar</button>
         </div>
@@ -846,7 +876,7 @@
 
             <div class="comentarios">
                 <div class="campo-comentario">
-                    <input type="text" class="nome-usuario" placeholder="Seu nome" maxlength="30">
+                    <div class="comentando-como"><span class="cc-rotulo">Comentando como</span> <span class="cc-avatar-inline"></span><span class="cc-nome-inline">Leitor</span> <button type="button" class="cc-trocar" onclick="abrirPerfil()">trocar</button></div>
                     <input type="text" class="texto-comentario-input" placeholder="Escreva um comentário..." maxlength="200">
                     <button type="button" onclick="publicarComentario(this)">Publicar</button>
                 </div>
@@ -898,7 +928,7 @@
 
             <div class="comentarios">
                 <div class="campo-comentario">
-                    <input type="text" class="nome-usuario" placeholder="Seu nome" maxlength="30">
+                    <div class="comentando-como"><span class="cc-rotulo">Comentando como</span> <span class="cc-avatar-inline"></span><span class="cc-nome-inline">Leitor</span> <button type="button" class="cc-trocar" onclick="abrirPerfil()">trocar</button></div>
                     <input type="text" class="texto-comentario-input" placeholder="Escreva um comentário..." maxlength="200">
                     <button type="button" onclick="publicarComentario(this)">Publicar</button>
                 </div>
@@ -941,7 +971,7 @@
             </div>
             <div class="comentarios">
                 <div class="campo-comentario">
-                    <input type="text" class="nome-usuario" placeholder="Seu nome" maxlength="30">
+                    <div class="comentando-como"><span class="cc-rotulo">Comentando como</span> <span class="cc-avatar-inline"></span><span class="cc-nome-inline">Leitor</span> <button type="button" class="cc-trocar" onclick="abrirPerfil()">trocar</button></div>
                     <input type="text" class="texto-comentario-input" placeholder="Escreva um comentário..." maxlength="200">
                     <button type="button" onclick="publicarComentario(this)">Publicar</button>
                 </div>
@@ -982,7 +1012,7 @@
             </div>
             <div class="comentarios">
                 <div class="campo-comentario">
-                    <input type="text" class="nome-usuario" placeholder="Seu nome" maxlength="30">
+                    <div class="comentando-como"><span class="cc-rotulo">Comentando como</span> <span class="cc-avatar-inline"></span><span class="cc-nome-inline">Leitor</span> <button type="button" class="cc-trocar" onclick="abrirPerfil()">trocar</button></div>
                     <input type="text" class="texto-comentario-input" placeholder="Escreva um comentário..." maxlength="200">
                     <button type="button" onclick="publicarComentario(this)">Publicar</button>
                 </div>
@@ -1023,7 +1053,7 @@
             </div>
             <div class="comentarios">
                 <div class="campo-comentario">
-                    <input type="text" class="nome-usuario" placeholder="Seu nome" maxlength="30">
+                    <div class="comentando-como"><span class="cc-rotulo">Comentando como</span> <span class="cc-avatar-inline"></span><span class="cc-nome-inline">Leitor</span> <button type="button" class="cc-trocar" onclick="abrirPerfil()">trocar</button></div>
                     <input type="text" class="texto-comentario-input" placeholder="Escreva um comentário..." maxlength="200">
                     <button type="button" onclick="publicarComentario(this)">Publicar</button>
                 </div>
@@ -1064,7 +1094,7 @@
             </div>
             <div class="comentarios">
                 <div class="campo-comentario">
-                    <input type="text" class="nome-usuario" placeholder="Seu nome" maxlength="30">
+                    <div class="comentando-como"><span class="cc-rotulo">Comentando como</span> <span class="cc-avatar-inline"></span><span class="cc-nome-inline">Leitor</span> <button type="button" class="cc-trocar" onclick="abrirPerfil()">trocar</button></div>
                     <input type="text" class="texto-comentario-input" placeholder="Escreva um comentário..." maxlength="200">
                     <button type="button" onclick="publicarComentario(this)">Publicar</button>
                 </div>
@@ -1105,7 +1135,7 @@
             </div>
             <div class="comentarios">
                 <div class="campo-comentario">
-                    <input type="text" class="nome-usuario" placeholder="Seu nome" maxlength="30">
+                    <div class="comentando-como"><span class="cc-rotulo">Comentando como</span> <span class="cc-avatar-inline"></span><span class="cc-nome-inline">Leitor</span> <button type="button" class="cc-trocar" onclick="abrirPerfil()">trocar</button></div>
                     <input type="text" class="texto-comentario-input" placeholder="Escreva um comentário..." maxlength="200">
                     <button type="button" onclick="publicarComentario(this)">Publicar</button>
                 </div>
@@ -1146,7 +1176,7 @@
             </div>
             <div class="comentarios">
                 <div class="campo-comentario">
-                    <input type="text" class="nome-usuario" placeholder="Seu nome" maxlength="30">
+                    <div class="comentando-como"><span class="cc-rotulo">Comentando como</span> <span class="cc-avatar-inline"></span><span class="cc-nome-inline">Leitor</span> <button type="button" class="cc-trocar" onclick="abrirPerfil()">trocar</button></div>
                     <input type="text" class="texto-comentario-input" placeholder="Escreva um comentário..." maxlength="200">
                     <button type="button" onclick="publicarComentario(this)">Publicar</button>
                 </div>
@@ -1187,7 +1217,7 @@
             </div>
             <div class="comentarios">
                 <div class="campo-comentario">
-                    <input type="text" class="nome-usuario" placeholder="Seu nome" maxlength="30">
+                    <div class="comentando-como"><span class="cc-rotulo">Comentando como</span> <span class="cc-avatar-inline"></span><span class="cc-nome-inline">Leitor</span> <button type="button" class="cc-trocar" onclick="abrirPerfil()">trocar</button></div>
                     <input type="text" class="texto-comentario-input" placeholder="Escreva um comentário..." maxlength="200">
                     <button type="button" onclick="publicarComentario(this)">Publicar</button>
                 </div>
@@ -1230,7 +1260,7 @@ Além de bonitos, os panos são ótimos para o dia a dia. Você pode usar para s
             </div>
             <div class="comentarios">
                 <div class="campo-comentario">
-                    <input type="text" class="nome-usuario" placeholder="Seu nome" maxlength="30">
+                    <div class="comentando-como"><span class="cc-rotulo">Comentando como</span> <span class="cc-avatar-inline"></span><span class="cc-nome-inline">Leitor</span> <button type="button" class="cc-trocar" onclick="abrirPerfil()">trocar</button></div>
                     <input type="text" class="texto-comentario-input" placeholder="Escreva um comentário..." maxlength="200">
                     <button type="button" onclick="publicarComentario(this)">Publicar</button>
                 </div>
@@ -1271,7 +1301,7 @@ Além de bonitos, os panos são ótimos para o dia a dia. Você pode usar para s
             </div>
             <div class="comentarios">
                 <div class="campo-comentario">
-                    <input type="text" class="nome-usuario" placeholder="Seu nome" maxlength="30">
+                    <div class="comentando-como"><span class="cc-rotulo">Comentando como</span> <span class="cc-avatar-inline"></span><span class="cc-nome-inline">Leitor</span> <button type="button" class="cc-trocar" onclick="abrirPerfil()">trocar</button></div>
                     <input type="text" class="texto-comentario-input" placeholder="Escreva um comentário..." maxlength="200">
                     <button type="button" onclick="publicarComentario(this)">Publicar</button>
                 </div>
@@ -1312,7 +1342,7 @@ Além de bonitos, os panos são ótimos para o dia a dia. Você pode usar para s
             </div>
             <div class="comentarios">
                 <div class="campo-comentario">
-                    <input type="text" class="nome-usuario" placeholder="Seu nome" maxlength="30">
+                    <div class="comentando-como"><span class="cc-rotulo">Comentando como</span> <span class="cc-avatar-inline"></span><span class="cc-nome-inline">Leitor</span> <button type="button" class="cc-trocar" onclick="abrirPerfil()">trocar</button></div>
                     <input type="text" class="texto-comentario-input" placeholder="Escreva um comentário..." maxlength="200">
                     <button type="button" onclick="publicarComentario(this)">Publicar</button>
                 </div>
@@ -1354,7 +1384,7 @@ Além de bonitos, os panos são ótimos para o dia a dia. Você pode usar para s
             </div>
             <div class="comentarios">
                 <div class="campo-comentario">
-                    <input type="text" class="nome-usuario" placeholder="Seu nome" maxlength="30">
+                    <div class="comentando-como"><span class="cc-rotulo">Comentando como</span> <span class="cc-avatar-inline"></span><span class="cc-nome-inline">Leitor</span> <button type="button" class="cc-trocar" onclick="abrirPerfil()">trocar</button></div>
                     <input type="text" class="texto-comentario-input" placeholder="Escreva um comentário..." maxlength="200">
                     <button type="button" onclick="publicarComentario(this)">Publicar</button>
                 </div>
@@ -1395,7 +1425,7 @@ Além de bonitos, os panos são ótimos para o dia a dia. Você pode usar para s
             </div>
             <div class="comentarios">
                 <div class="campo-comentario">
-                    <input type="text" class="nome-usuario" placeholder="Seu nome" maxlength="30">
+                    <div class="comentando-como"><span class="cc-rotulo">Comentando como</span> <span class="cc-avatar-inline"></span><span class="cc-nome-inline">Leitor</span> <button type="button" class="cc-trocar" onclick="abrirPerfil()">trocar</button></div>
                     <input type="text" class="texto-comentario-input" placeholder="Escreva um comentário..." maxlength="200">
                     <button type="button" onclick="publicarComentario(this)">Publicar</button>
                 </div>
@@ -1436,7 +1466,7 @@ Além de bonitos, os panos são ótimos para o dia a dia. Você pode usar para s
             </div>
             <div class="comentarios">
                 <div class="campo-comentario">
-                    <input type="text" class="nome-usuario" placeholder="Seu nome" maxlength="30">
+                    <div class="comentando-como"><span class="cc-rotulo">Comentando como</span> <span class="cc-avatar-inline"></span><span class="cc-nome-inline">Leitor</span> <button type="button" class="cc-trocar" onclick="abrirPerfil()">trocar</button></div>
                     <input type="text" class="texto-comentario-input" placeholder="Escreva um comentário..." maxlength="200">
                     <button type="button" onclick="publicarComentario(this)">Publicar</button>
                 </div>
@@ -1463,65 +1493,281 @@ Além de bonitos, os panos são ótimos para o dia a dia. Você pode usar para s
         <p style="margin-top:6px;">Este site participa de programas de afiliados. Alguns links neste site podem gerar comissão em caso de compra, sem custo adicional para o leitor.</p>
     </footer>
 
+<!-- FIREBASE: inicialização, autenticação anônima e helpers do Firestore -->
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import {
+        getAuth, signInAnonymously, onAuthStateChanged
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import {
+        getFirestore, doc, getDoc, getDocs, setDoc, updateDoc, deleteDoc,
+        collection, onSnapshot, query, orderBy, arrayUnion, arrayRemove,
+        increment, serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    var firebaseConfig = {
+        apiKey: "AIzaSyCxh5tLMIgeQgP1-xog6UY9ZGwuhVOiSGM",
+        authDomain: "reporter-ofertas.firebaseapp.com",
+        projectId: "reporter-ofertas",
+        storageBucket: "reporter-ofertas.firebasestorage.app",
+        messagingSenderId: "72417914982",
+        appId: "1:72417914982:web:e16f31d9125e2ef45b7da7"
+    };
+
+    var app = initializeApp(firebaseConfig);
+    var auth = getAuth(app);
+    var db = getFirestore(app);
+
+    // Promessa que resolve quando o leitor já está autenticado (login anônimo automático)
+    window.__fbUsuarioPronto = new Promise(function (resolve) {
+        onAuthStateChanged(auth, function (usuario) {
+            if (usuario) {
+                resolve(usuario);
+            } else {
+                signInAnonymously(auth).catch(function (erro) {
+                    console.error("Erro no login anônimo:", erro);
+                });
+            }
+        });
+    });
+
+    // Expondo o necessário para os scripts "clássicos" mais abaixo
+    window.__fb = {
+        auth: auth,
+        db: db,
+        doc: doc, getDoc: getDoc, getDocs: getDocs, setDoc: setDoc,
+        updateDoc: updateDoc, deleteDoc: deleteDoc, collection: collection,
+        onSnapshot: onSnapshot, query: query, orderBy: orderBy,
+        arrayUnion: arrayUnion, arrayRemove: arrayRemove,
+        increment: increment, serverTimestamp: serverTimestamp
+    };
+</script>
+
 <script>
 (function () {
     "use strict";
 
-    var STORAGE_KEY = "siteDadosPosts";
-    var PROFILE_KEY = "sitePerfilUsuario";
+    var PROFILE_KEY_LOCAL = "sitePerfilUsuarioCache"; // apenas cache local para exibir rápido, a fonte real é o Firestore
 
-    function gerarId(prefixo) {
+    var uidAtual = null;
+    var perfilAtual = { nome: "", bio: "", avatar: "👤" };
+    var listenersComentarios = {}; // postId -> função de cancelamento do onSnapshot
+
+    function fb() { return window.__fb; }
+
+    function gerarIdLocal(prefixo) {
         return prefixo + "-" + Date.now() + "-" + Math.random().toString(36).slice(2, 8);
     }
 
-    function carregarDados() {
-        try {
-            return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
-        } catch (e) {
-            console.error("Erro ao ler localStorage:", e);
-            return {};
+    function formatarData(timestamp) {
+        if (timestamp && typeof timestamp.toDate === "function") {
+            return timestamp.toDate().toLocaleString("pt-BR");
         }
-    }
-
-    function salvarDados(dados) {
-        try {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(dados));
-        } catch (e) {
-            console.error("Erro ao salvar localStorage:", e);
-        }
+        return new Date().toLocaleString("pt-BR");
     }
 
     function getPostId(card) {
         return card.getAttribute("data-post-id");
     }
 
-    function garantirPost(dados, postId) {
-        if (!dados[postId]) {
-            dados[postId] = { curtido: false, curtidas: 0, comentarios: [] };
-        }
-        if (!Array.isArray(dados[postId].comentarios)) {
-            dados[postId].comentarios = [];
-        }
-        return dados[postId];
+    function refPost(postId) {
+        return fb().doc(fb().db, "posts", postId);
     }
 
-    window.curtir = function (botao) {
+    function refComentarios(postId) {
+        return fb().collection(fb().db, "posts", postId, "comentarios");
+    }
+
+    function refComentario(postId, comentarioId) {
+        return fb().doc(fb().db, "posts", postId, "comentarios", comentarioId);
+    }
+
+    function mostrarStatusConexao(mensagem) {
+        var els = document.querySelectorAll(".status-conexao");
+        els.forEach(function (el) { el.textContent = mensagem; });
+    }
+
+    // ---------- PERFIL ----------
+
+    function carregarPerfilCacheLocal() {
+        try {
+            return JSON.parse(localStorage.getItem(PROFILE_KEY_LOCAL)) || { nome: "", bio: "", avatar: "👤" };
+        } catch (e) {
+            return { nome: "", bio: "", avatar: "👤" };
+        }
+    }
+
+    function salvarPerfilCacheLocal(perfil) {
+        try {
+            localStorage.setItem(PROFILE_KEY_LOCAL, JSON.stringify(perfil));
+        } catch (e) { /* silencioso */ }
+    }
+
+    function atualizarPerfilNaTela() {
+        var nome = perfilAtual.nome || "Perfil";
+
+        var nomeTopo = document.getElementById("perfilNomeTopo");
+        if (nomeTopo) nomeTopo.textContent = nome;
+
+        document.querySelectorAll(".cc-nome-inline").forEach(function (el) {
+            el.textContent = perfilAtual.nome || "defina seu nome";
+        });
+        document.querySelectorAll(".cc-avatar-inline").forEach(function (el) {
+            el.textContent = perfilAtual.avatar || "👤";
+        });
+    }
+
+    async function carregarPerfilDoFirestore() {
+        // Mostra o cache local instantaneamente, evitando tela "vazia" enquanto a rede responde
+        perfilAtual = carregarPerfilCacheLocal();
+        atualizarPerfilNaTela();
+
+        var usuario = await window.__fbUsuarioPronto;
+        uidAtual = usuario.uid;
+
+        var refUsuario = fb().doc(fb().db, "usuarios", uidAtual);
+        try {
+            var snap = await fb().getDoc(refUsuario);
+            if (snap.exists()) {
+                var dados = snap.data();
+                perfilAtual = {
+                    nome: dados.nome || "",
+                    bio: dados.bio || "",
+                    avatar: dados.avatar || "👤"
+                };
+                salvarPerfilCacheLocal(perfilAtual);
+            }
+        } catch (e) {
+            console.error("Não foi possível carregar o perfil no Firestore:", e);
+            mostrarStatusConexao("⚠️ Sem conexão com o servidor no momento.");
+        }
+
+        atualizarPerfilNaTela();
+    }
+
+    window.abrirPerfil = function () {
+        document.getElementById("perfilNomeInput").value = perfilAtual.nome || "";
+        document.getElementById("perfilBioInput").value = perfilAtual.bio || "";
+        document.getElementById("perfilAvatarInput").value = perfilAtual.avatar || "👤";
+        document.getElementById("perfilModal").classList.add("aberto");
+        document.getElementById("perfilNomeInput").focus();
+    };
+
+    window.fecharPerfil = function () {
+        document.getElementById("perfilModal").classList.remove("aberto");
+    };
+
+    window.fecharPerfilFora = function (event) {
+        if (event.target.id === "perfilModal") fecharPerfil();
+    };
+
+    window.salvarPerfil = async function () {
+        var nome = document.getElementById("perfilNomeInput").value.trim();
+        var bio = document.getElementById("perfilBioInput").value.trim();
+        var avatar = document.getElementById("perfilAvatarInput").value.trim() || "👤";
+
+        if (!nome) {
+            alert("Digite seu nome.");
+            document.getElementById("perfilNomeInput").focus();
+            return;
+        }
+
+        var botaoSalvar = document.querySelector(".perfil-salvar");
+        if (botaoSalvar) { botaoSalvar.disabled = true; botaoSalvar.textContent = "Salvando..."; }
+
+        try {
+            var usuario = await window.__fbUsuarioPronto;
+            uidAtual = usuario.uid;
+            var refUsuario = fb().doc(fb().db, "usuarios", uidAtual);
+            await fb().setDoc(refUsuario, {
+                nome: nome,
+                bio: bio,
+                avatar: avatar,
+                atualizadoEm: fb().serverTimestamp()
+            }, { merge: true });
+
+            perfilAtual = { nome: nome, bio: bio, avatar: avatar };
+            salvarPerfilCacheLocal(perfilAtual);
+            atualizarPerfilNaTela();
+            fecharPerfil();
+        } catch (e) {
+            console.error("Erro ao salvar perfil:", e);
+            alert("Não foi possível salvar o perfil agora. Verifique sua conexão e tente de novo.");
+        } finally {
+            if (botaoSalvar) { botaoSalvar.disabled = false; botaoSalvar.textContent = "Salvar perfil"; }
+        }
+    };
+
+    function exigirPerfil() {
+        if (!perfilAtual.nome) {
+            alert("Antes de comentar ou curtir, defina seu nome no perfil.");
+            window.abrirPerfil();
+            return false;
+        }
+        return true;
+    }
+
+    // ---------- CURTIDAS DE POST ----------
+
+    window.curtir = async function (botao) {
+        if (!exigirPerfil()) return;
         var card = botao.closest(".post-card");
         if (!card) return;
-
         var postId = getPostId(card);
-        var dados = carregarDados();
-        var post = garantirPost(dados, postId);
 
-        post.curtido = !post.curtido;
-        post.curtidas = Math.max(0, (post.curtidas || 0) + (post.curtido ? 1 : -1));
+        botao.disabled = true;
+        try {
+            var usuario = await window.__fbUsuarioPronto;
+            var ref = refPost(postId);
+            var snap = await fb().getDoc(ref);
+            var curtidasPor = (snap.exists() && Array.isArray(snap.data().curtidasPor)) ? snap.data().curtidasPor : [];
+            var jaCurtiu = curtidasPor.indexOf(usuario.uid) !== -1;
 
-        botao.classList.toggle("ativo", post.curtido);
-        var contador = botao.querySelector(".contador");
-        if (contador) contador.textContent = post.curtidas;
-
-        salvarDados(dados);
+            await fb().setDoc(ref, {
+                curtidasPor: jaCurtiu ? fb().arrayRemove(usuario.uid) : fb().arrayUnion(usuario.uid)
+            }, { merge: true });
+            // A atualização visual acontece via onSnapshot da coleção "posts" (aplicarEstadoPost)
+        } catch (e) {
+            console.error("Erro ao curtir:", e);
+            alert("Não foi possível registrar sua curtida agora.");
+        } finally {
+            botao.disabled = false;
+        }
     };
+
+    function aplicarEstadoPost(postId, dados) {
+        var card = document.querySelector('.post-card[data-post-id="' + postId + '"]');
+        if (!card) return;
+
+        var curtidasPor = (dados && Array.isArray(dados.curtidasPor)) ? dados.curtidasPor : [];
+        var totalComentarios = (dados && typeof dados.totalComentarios === "number") ? dados.totalComentarios : 0;
+
+        var botaoCurtir = card.querySelector(".curtir");
+        if (botaoCurtir) {
+            var curtido = uidAtual && curtidasPor.indexOf(uidAtual) !== -1;
+            botaoCurtir.classList.toggle("ativo", !!curtido);
+            var contador = botaoCurtir.querySelector(".contador");
+            if (contador) contador.textContent = curtidasPor.length;
+        }
+
+        var contadorComentarios = card.querySelector(".contador-comentarios");
+        if (contadorComentarios) contadorComentarios.textContent = totalComentarios;
+    }
+
+    function escutarTodosOsPosts() {
+        var colecao = fb().collection(fb().db, "posts");
+        fb().onSnapshot(colecao, function (snapshot) {
+            snapshot.forEach(function (docSnap) {
+                aplicarEstadoPost(docSnap.id, docSnap.data());
+            });
+            mostrarStatusConexao("");
+        }, function (erro) {
+            console.error("Erro ao escutar posts:", erro);
+            mostrarStatusConexao("⚠️ Sem conexão com o servidor no momento.");
+        });
+    }
+
+    // ---------- COMENTÁRIOS E RESPOSTAS ----------
 
     window.abrirComentarios = function (botao) {
         var card = botao.closest(".post-card");
@@ -1533,28 +1779,47 @@ Além de bonitos, os panos são ótimos para o dia a dia. Você pode usar para s
         area.classList.toggle("aberto");
 
         if (area.classList.contains("aberto")) {
-            var nome = area.querySelector(".nome-usuario");
-            if (nome) nome.focus();
+            var postId = getPostId(card);
+            escutarComentarios(postId, card);
         }
     };
 
-    window.publicarComentario = function (botao) {
+    function escutarComentarios(postId, card) {
+        if (listenersComentarios[postId]) return; // já tem listener ativo
+
+        var q = fb().query(refComentarios(postId), fb().orderBy("criadoEm", "asc"));
+        var cancelar = fb().onSnapshot(q, function (snapshot) {
+            var comentarios = [];
+            snapshot.forEach(function (docSnap) {
+                var dados = docSnap.data();
+                comentarios.push({
+                    id: docSnap.id,
+                    uid: dados.uid,
+                    nome: dados.nome,
+                    avatar: dados.avatar,
+                    texto: dados.texto,
+                    data: formatarData(dados.criadoEm),
+                    curtidasPor: Array.isArray(dados.curtidasPor) ? dados.curtidasPor : [],
+                    respostas: Array.isArray(dados.respostas) ? dados.respostas : []
+                });
+            });
+            renderizarComentarios(card, postId, comentarios);
+        }, function (erro) {
+            console.error("Erro ao escutar comentários:", erro);
+            mostrarStatusConexao("⚠️ Sem conexão com o servidor no momento.");
+        });
+
+        listenersComentarios[postId] = cancelar;
+    }
+
+    window.publicarComentario = async function (botao) {
+        if (!exigirPerfil()) return;
         var card = botao.closest(".post-card");
         if (!card) return;
 
         var area = card.querySelector(".comentarios");
-        var nomeInput = area.querySelector(".nome-usuario");
         var textoInput = area.querySelector(".texto-comentario-input");
-
-        var perfil = carregarPerfil();
-        var nome = (nomeInput.value.trim() || perfil.nome || "").trim();
         var texto = textoInput.value.trim();
-
-        if (!nome) {
-            alert("Digite seu nome.");
-            nomeInput.focus();
-            return;
-        }
 
         if (!texto) {
             alert("Digite um comentário.");
@@ -1563,58 +1828,224 @@ Além de bonitos, os panos são ótimos para o dia a dia. Você pode usar para s
         }
 
         var postId = getPostId(card);
-        var dados = carregarDados();
-        var post = garantirPost(dados, postId);
+        botao.disabled = true;
 
-        post.comentarios.push({
-            id: gerarId("comentario"),
-            nome: nome,
-            texto: texto,
-            data: new Date().toLocaleString("pt-BR"),
-            curtidas: 0,
-            curtido: false,
-            respostas: [],
-            avatar: perfil.avatar || "👤"
-        });
+        try {
+            var usuario = await window.__fbUsuarioPronto;
 
-        salvarDados(dados);
-        textoInput.value = "";
+            // Cria o comentário
+            var novoId = gerarIdLocal("comentario");
+            await fb().setDoc(refComentario(postId, novoId), {
+                uid: usuario.uid,
+                nome: perfilAtual.nome || "Leitor",
+                avatar: perfilAtual.avatar || "👤",
+                texto: texto,
+                criadoEm: fb().serverTimestamp(),
+                curtidasPor: [],
+                respostas: []
+            });
 
-        renderizarComentarios(card);
+            // Mantém o contador de comentários do post atualizado
+            await fb().setDoc(refPost(postId), {
+                totalComentarios: fb().increment(1)
+            }, { merge: true });
+
+            textoInput.value = "";
+        } catch (e) {
+            console.error("Erro ao publicar comentário:", e);
+            alert("Não foi possível publicar seu comentário agora.");
+        } finally {
+            botao.disabled = false;
+        }
     };
 
-    function atualizarContador(card) {
-        var postId = getPostId(card);
-        var dados = carregarDados();
-        var post = garantirPost(dados, postId);
-        var contador = card.querySelector(".contador-comentarios");
-        if (contador) contador.textContent = post.comentarios.length;
+    function localizarNaLista(lista, id) {
+        for (var i = 0; i < lista.length; i++) {
+            if (lista[i].id === id) return { item: lista[i], indice: i, ehResposta: false };
+        }
+        return null;
     }
 
-    function renderizarComentarios(card) {
-        var postId = getPostId(card);
-        var dados = carregarDados();
-        var post = garantirPost(dados, postId);
+    function localizarResposta(comentario, respostaId) {
+        var respostas = comentario.respostas || [];
+        for (var i = 0; i < respostas.length; i++) {
+            if (respostas[i].id === respostaId) return { item: respostas[i], indice: i };
+        }
+        return null;
+    }
+
+    async function curtirComentario(postId, comentario) {
+        if (!exigirPerfil()) return;
+        var usuario = await window.__fbUsuarioPronto;
+        var jaCurtiu = (comentario.curtidasPor || []).indexOf(usuario.uid) !== -1;
+        try {
+            await fb().updateDoc(refComentario(postId, comentario.id), {
+                curtidasPor: jaCurtiu ? fb().arrayRemove(usuario.uid) : fb().arrayUnion(usuario.uid)
+            });
+        } catch (e) {
+            console.error("Erro ao curtir comentário:", e);
+        }
+    }
+
+    async function curtirResposta(postId, comentario, resposta) {
+        if (!exigirPerfil()) return;
+        var usuario = await window.__fbUsuarioPronto;
+        try {
+            var snap = await fb().getDoc(refComentario(postId, comentario.id));
+            if (!snap.exists()) return;
+            var dados = snap.data();
+            var respostas = Array.isArray(dados.respostas) ? dados.respostas : [];
+            var alvo = respostas.find(function (r) { return r.id === resposta.id; });
+            if (!alvo) return;
+
+            var curtidasPor = Array.isArray(alvo.curtidasPor) ? alvo.curtidasPor.slice() : [];
+            var indice = curtidasPor.indexOf(usuario.uid);
+            if (indice === -1) curtidasPor.push(usuario.uid);
+            else curtidasPor.splice(indice, 1);
+            alvo.curtidasPor = curtidasPor;
+
+            await fb().updateDoc(refComentario(postId, comentario.id), { respostas: respostas });
+        } catch (e) {
+            console.error("Erro ao curtir resposta:", e);
+        }
+    }
+
+    async function excluirComentario(postId, comentario) {
+        if (!confirm("Excluir este comentário e todas as respostas dele?")) return;
+        try {
+            await fb().deleteDoc(refComentario(postId, comentario.id));
+            await fb().setDoc(refPost(postId), { totalComentarios: fb().increment(-1) }, { merge: true });
+        } catch (e) {
+            console.error("Erro ao excluir comentário:", e);
+            alert("Não foi possível excluir. Talvez este comentário não seja seu.");
+        }
+    }
+
+    async function excluirResposta(postId, comentario, resposta) {
+        if (!confirm("Excluir esta resposta?")) return;
+        try {
+            var snap = await fb().getDoc(refComentario(postId, comentario.id));
+            if (!snap.exists()) return;
+            var dados = snap.data();
+            var respostas = (Array.isArray(dados.respostas) ? dados.respostas : []).filter(function (r) {
+                return r.id !== resposta.id;
+            });
+            await fb().updateDoc(refComentario(postId, comentario.id), { respostas: respostas });
+        } catch (e) {
+            console.error("Erro ao excluir resposta:", e);
+        }
+    }
+
+    async function publicarResposta(postId, comentario, texto) {
+        if (!exigirPerfil()) return;
+        var usuario = await window.__fbUsuarioPronto;
+        var novaResposta = {
+            id: gerarIdLocal("resposta"),
+            uid: usuario.uid,
+            nome: perfilAtual.nome || "Leitor",
+            avatar: perfilAtual.avatar || "👤",
+            texto: texto,
+            data: new Date().toLocaleString("pt-BR"),
+            curtidasPor: []
+        };
+        try {
+            await fb().updateDoc(refComentario(postId, comentario.id), {
+                respostas: fb().arrayUnion(novaResposta)
+            });
+        } catch (e) {
+            console.error("Erro ao publicar resposta:", e);
+            alert("Não foi possível publicar sua resposta agora.");
+        }
+    }
+
+    function renderizarComentarios(card, postId, comentarios) {
         var lista = card.querySelector(".lista-comentarios");
         if (!lista) return;
 
         lista.innerHTML = "";
 
-        if (post.comentarios.length === 0) {
+        if (comentarios.length === 0) {
             var vazio = document.createElement("div");
             vazio.className = "sem-comentarios";
             vazio.textContent = "Nenhum comentário ainda.";
             lista.appendChild(vazio);
         } else {
-            post.comentarios.forEach(function (comentario) {
-                criarComentario(card, lista, comentario);
+            comentarios.forEach(function (comentario) {
+                lista.appendChild(criarComentarioEl(postId, comentario));
             });
         }
-
-        atualizarContador(card);
     }
 
-    function criarComentario(card, lista, comentario) {
+    function criarAcoesComentario(postId, comentario, alvo, eResposta) {
+        var wrapper = document.createElement("div");
+        var botoes = document.createElement("div");
+        botoes.className = eResposta ? "resposta-acoes" : "acoes-comentario";
+
+        var curtidasPor = alvo.curtidasPor || [];
+        var curtirBtn = document.createElement("button");
+        curtirBtn.type = "button";
+        curtirBtn.className = eResposta ? "resposta-btn" : "botao-curtir-comentario";
+        curtirBtn.textContent = "❤️ " + curtidasPor.length;
+        if (uidAtual && curtidasPor.indexOf(uidAtual) !== -1) curtirBtn.classList.add("ativo");
+        curtirBtn.onclick = function () {
+            if (eResposta) curtirResposta(postId, comentario, alvo);
+            else curtirComentario(postId, alvo);
+        };
+
+        var responderBtn = document.createElement("button");
+        responderBtn.type = "button";
+        responderBtn.className = eResposta ? "resposta-btn" : "botao-responder";
+        responderBtn.textContent = "↩️ Responder";
+
+        var excluirBtn = document.createElement("button");
+        excluirBtn.type = "button";
+        excluirBtn.className = "botao-excluir";
+        excluirBtn.textContent = "🗑️";
+        excluirBtn.setAttribute("aria-label", "Excluir");
+        excluirBtn.style.display = (uidAtual && alvo.uid === uidAtual) ? "" : "none";
+        excluirBtn.onclick = function () {
+            if (eResposta) excluirResposta(postId, comentario, alvo);
+            else excluirComentario(postId, alvo);
+        };
+
+        var campo = document.createElement("div");
+        campo.className = eResposta ? "campo-resposta-nivel" : "campo-resposta";
+
+        var input = document.createElement("input");
+        input.type = "text";
+        input.maxLength = 200;
+        input.placeholder = "Responder a " + alvo.nome + "...";
+
+        var publicar = document.createElement("button");
+        publicar.type = "button";
+        publicar.className = eResposta ? "resposta-btn" : "botao-publicar-resposta";
+        publicar.textContent = "Publicar";
+
+        responderBtn.onclick = function () {
+            campo.classList.toggle("aberto");
+            if (campo.classList.contains("aberto")) input.focus();
+        };
+
+        publicar.onclick = function () {
+            var textoResposta = input.value.trim();
+            if (!textoResposta) { alert("Digite uma resposta."); input.focus(); return; }
+            // Responder sempre ao comentário raiz (respostas de 1 nível)
+            publicarResposta(postId, comentario, textoResposta);
+            input.value = "";
+            campo.classList.remove("aberto");
+        };
+
+        botoes.appendChild(curtirBtn);
+        botoes.appendChild(responderBtn);
+        botoes.appendChild(excluirBtn);
+        campo.appendChild(input);
+        campo.appendChild(publicar);
+        wrapper.appendChild(botoes);
+        wrapper.appendChild(campo);
+        return wrapper;
+    }
+
+    function criarComentarioEl(postId, comentario) {
         var elemento = document.createElement("div");
         elemento.className = "comentario";
         elemento.setAttribute("data-comment-id", comentario.id);
@@ -1641,176 +2072,49 @@ Além de bonitos, os panos são ótimos para o dia a dia. Você pode usar para s
         conteudo.appendChild(nome);
         conteudo.appendChild(texto);
         conteudo.appendChild(hora);
-        conteudo.appendChild(criarAcoesComentario(card, comentario, false));
+        conteudo.appendChild(criarAcoesComentario(postId, comentario, comentario, false));
 
         var respostasContainer = document.createElement("div");
         respostasContainer.className = "respostas-container";
-        renderizarRespostas(card, comentario, respostasContainer, 1);
+        (comentario.respostas || []).forEach(function (resposta) {
+            respostasContainer.appendChild(criarRespostaEl(postId, comentario, resposta));
+        });
         conteudo.appendChild(respostasContainer);
 
         elemento.appendChild(avatar);
         elemento.appendChild(conteudo);
-        lista.appendChild(elemento);
+        return elemento;
     }
 
-    function localizarItem(lista, id) {
-        if (!Array.isArray(lista)) return null;
-        for (var i = 0; i < lista.length; i++) {
-            if (lista[i].id === id) return lista[i];
-            var encontrado = localizarItem(lista[i].respostas, id);
-            if (encontrado) return encontrado;
-        }
-        return null;
+    function criarRespostaEl(postId, comentario, resposta) {
+        var bloco = document.createElement("div");
+        bloco.className = "resposta-nivel";
+        bloco.setAttribute("data-comment-id", resposta.id);
+        bloco.style.marginLeft = "18px";
+
+        var linha = document.createElement("div");
+        var avatar = document.createElement("span");
+        avatar.textContent = (resposta.avatar || "👤") + " ";
+        var nome = document.createElement("strong");
+        nome.textContent = resposta.nome + ": ";
+        var texto = document.createElement("span");
+        texto.textContent = resposta.texto;
+        linha.appendChild(avatar);
+        linha.appendChild(nome);
+        linha.appendChild(texto);
+
+        var data = document.createElement("div");
+        data.className = "hora-comentario";
+        data.textContent = resposta.data;
+
+        bloco.appendChild(linha);
+        bloco.appendChild(data);
+        bloco.appendChild(criarAcoesComentario(postId, comentario, resposta, true));
+
+        return bloco;
     }
 
-    function removerItem(lista, id) {
-        if (!Array.isArray(lista)) return false;
-        for (var i = 0; i < lista.length; i++) {
-            if (lista[i].id === id) {
-                lista.splice(i, 1);
-                return true;
-            }
-            if (removerItem(lista[i].respostas, id)) return true;
-        }
-        return false;
-    }
-
-    function criarAcoesComentario(card, alvo, eResposta) {
-        var wrapper = document.createElement("div");
-        var botoes = document.createElement("div");
-        botoes.className = eResposta ? "resposta-acoes" : "acoes-comentario";
-
-        var curtirBtn = document.createElement("button");
-        curtirBtn.type = "button";
-        curtirBtn.className = eResposta ? "resposta-btn" : "botao-curtir-comentario";
-        curtirBtn.textContent = "❤️ " + (alvo.curtidas || 0);
-        if (alvo.curtido) curtirBtn.classList.add("ativo");
-
-        curtirBtn.onclick = function () {
-            var dados = carregarDados();
-            var post = garantirPost(dados, getPostId(card));
-            var encontrado = localizarItem(post.comentarios, alvo.id);
-            if (!encontrado) return;
-            encontrado.curtido = !encontrado.curtido;
-            encontrado.curtidas = Math.max(0, (encontrado.curtidas || 0) + (encontrado.curtido ? 1 : -1));
-            salvarDados(dados);
-            renderizarComentarios(card);
-        };
-
-        var responderBtn = document.createElement("button");
-        responderBtn.type = "button";
-        responderBtn.className = eResposta ? "resposta-btn" : "botao-responder";
-        responderBtn.textContent = "↩️ Responder";
-
-        var excluirBtn = document.createElement("button");
-        excluirBtn.type = "button";
-        excluirBtn.className = "botao-excluir";
-        excluirBtn.textContent = "🗑️";
-        excluirBtn.setAttribute("aria-label", "Excluir");
-        excluirBtn.onclick = function () {
-            var mensagem = eResposta
-                ? "Excluir esta resposta?"
-                : "Excluir este comentário e todas as respostas dele?";
-            if (!confirm(mensagem)) return;
-
-            var dados = carregarDados();
-            var post = garantirPost(dados, getPostId(card));
-            removerItem(post.comentarios, alvo.id);
-            salvarDados(dados);
-            renderizarComentarios(card);
-        };
-
-        var campo = document.createElement("div");
-        campo.className = eResposta ? "campo-resposta-nivel" : "campo-resposta";
-
-        var input = document.createElement("input");
-        input.type = "text";
-        input.maxLength = 200;
-        input.placeholder = "Responder a " + alvo.nome + "...";
-
-        var publicar = document.createElement("button");
-        publicar.type = "button";
-        publicar.className = eResposta ? "resposta-btn" : "botao-publicar-resposta";
-        publicar.textContent = "Publicar";
-
-        responderBtn.onclick = function () {
-            campo.classList.toggle("aberto");
-            if (campo.classList.contains("aberto")) input.focus();
-        };
-
-        publicar.onclick = function () {
-            var textoResposta = input.value.trim();
-            if (!textoResposta) { alert("Digite uma resposta."); input.focus(); return; }
-
-            var dados = carregarDados();
-            var post = garantirPost(dados, getPostId(card));
-            var pai = localizarItem(post.comentarios, alvo.id);
-            if (!pai) return;
-            if (!Array.isArray(pai.respostas)) pai.respostas = [];
-
-            var perfil = carregarPerfil();
-            pai.respostas.push({
-                id: gerarId("resposta"),
-                comentarioId: pai.id,
-                nome: perfil.nome || "Você",
-                avatar: perfil.avatar || "👤",
-                texto: textoResposta,
-                data: new Date().toLocaleString("pt-BR"),
-                curtidas: 0,
-                curtido: false,
-                respostas: []
-            });
-
-            salvarDados(dados);
-            input.value = "";
-            campo.classList.remove("aberto");
-            renderizarComentarios(card);
-        };
-
-        botoes.appendChild(curtirBtn);
-        botoes.appendChild(responderBtn);
-        botoes.appendChild(excluirBtn);
-        campo.appendChild(input);
-        campo.appendChild(publicar);
-        wrapper.appendChild(botoes);
-        wrapper.appendChild(campo);
-        return wrapper;
-    }
-
-    function renderizarRespostas(card, pai, container, nivel) {
-        var respostas = Array.isArray(pai.respostas) ? pai.respostas : [];
-        respostas.forEach(function (resposta) {
-            var bloco = document.createElement("div");
-            bloco.className = "resposta-nivel";
-            bloco.setAttribute("data-comment-id", resposta.id);
-            bloco.style.marginLeft = Math.min(nivel * 18, 90) + "px";
-
-            var linha = document.createElement("div");
-            var avatar = document.createElement("span");
-            avatar.textContent = (resposta.avatar || "👤") + " ";
-            var nome = document.createElement("strong");
-            nome.textContent = resposta.nome + ": ";
-            var texto = document.createElement("span");
-            texto.textContent = resposta.texto;
-            linha.appendChild(avatar);
-            linha.appendChild(nome);
-            linha.appendChild(texto);
-
-            var data = document.createElement("div");
-            data.className = "hora-comentario";
-            data.textContent = resposta.data;
-
-            bloco.appendChild(linha);
-            bloco.appendChild(data);
-            bloco.appendChild(criarAcoesComentario(card, resposta, true));
-
-            var filhos = document.createElement("div");
-            filhos.className = "respostas-container";
-            renderizarRespostas(card, resposta, filhos, nivel + 1);
-            bloco.appendChild(filhos);
-            container.appendChild(bloco);
-        });
-    }
+    // ---------- COMPARTILHAR (sem mudanças de backend) ----------
 
     window.compartilhar = function (botao) {
         var card = botao ? botao.closest(".post-card") : null;
@@ -1836,84 +2140,18 @@ Além de bonitos, os panos são ótimos para o dia a dia. Você pode usar para s
         }
     };
 
-    function carregarPerfil() {
-        try {
-            return JSON.parse(localStorage.getItem(PROFILE_KEY)) || { nome: "", bio: "", avatar: "👤" };
-        } catch (e) {
-            return { nome: "", bio: "", avatar: "👤" };
-        }
-    }
+    // ---------- INICIALIZAÇÃO ----------
 
-    function atualizarPerfilNaTela() {
-        var perfil = carregarPerfil();
-        var nome = perfil.nome || "Perfil";
-
-        var nomeTopo = document.getElementById("perfilNomeTopo");
-        if (nomeTopo) nomeTopo.textContent = nome;
-
-        document.querySelectorAll(".nome-usuario").forEach(function (input) {
-            if (perfil.nome && !input.value) input.value = perfil.nome;
-            input.placeholder = perfil.nome ? "Seu nome (do perfil)" : "Seu nome";
-        });
-    }
-
-    window.abrirPerfil = function () {
-        var perfil = carregarPerfil();
-        document.getElementById("perfilNomeInput").value = perfil.nome || "";
-        document.getElementById("perfilBioInput").value = perfil.bio || "";
-        document.getElementById("perfilAvatarInput").value = perfil.avatar || "👤";
-        document.getElementById("perfilModal").classList.add("aberto");
-        document.getElementById("perfilNomeInput").focus();
-    };
-
-    window.fecharPerfil = function () {
-        document.getElementById("perfilModal").classList.remove("aberto");
-    };
-
-    window.fecharPerfilFora = function (event) {
-        if (event.target.id === "perfilModal") fecharPerfil();
-    };
-
-    window.salvarPerfil = function () {
-        var nome = document.getElementById("perfilNomeInput").value.trim();
-        var bio = document.getElementById("perfilBioInput").value.trim();
-        var avatar = document.getElementById("perfilAvatarInput").value.trim() || "👤";
-
-        if (!nome) {
-            alert("Digite seu nome.");
-            document.getElementById("perfilNomeInput").focus();
-            return;
-        }
-
-        localStorage.setItem(PROFILE_KEY, JSON.stringify({ nome: nome, bio: bio, avatar: avatar }));
-        atualizarPerfilNaTela();
-        fecharPerfil();
-    };
-
-    function iniciar() {
-        atualizarPerfilNaTela();
-
+    async function iniciar() {
         var cards = document.querySelectorAll(".post-card");
-        var dados = carregarDados();
-
         cards.forEach(function (card, indice) {
             if (!card.getAttribute("data-post-id")) {
                 card.setAttribute("data-post-id", "post-" + (indice + 1));
             }
-
-            var postId = getPostId(card);
-            var post = garantirPost(dados, postId);
-
-            var curtirBtn = card.querySelector(".curtir");
-            var contador = curtirBtn ? curtirBtn.querySelector(".contador") : null;
-
-            if (curtirBtn) curtirBtn.classList.toggle("ativo", post.curtido);
-            if (contador) contador.textContent = post.curtidas;
-
-            renderizarComentarios(card);
         });
 
-        salvarDados(dados);
+        await carregarPerfilDoFirestore();
+        escutarTodosOsPosts();
     }
 
     document.addEventListener("DOMContentLoaded", iniciar);
