@@ -6,6 +6,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Repórter Ofertas — Notícias e Achados</title>
     <meta name="description" content="Repórter Ofertas: notícias do dia com recomendações de produtos e ofertas selecionadas.">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" sizes="32x32" href="imagens/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="imagens/favicon-16.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="imagens/favicon-192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="imagens/favicon-180.png">
+    <link rel="shortcut icon" href="imagens/favicon.ico">
+
+    <!-- OPEN GRAPH (preview ao compartilhar no WhatsApp, Instagram, etc.) -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Repórter Ofertas">
+    <meta property="og:title" content="Repórter Ofertas — Notícias e Achados">
+    <meta property="og:description" content="Notícias do dia com recomendações de produtos e ofertas selecionadas.">
+    <meta property="og:image" content="https://reporterofertas.com.br/imagens/og-banner.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:url" content="https://reporterofertas.com.br/">
+    <meta property="og:locale" content="pt_BR">
+
+    <!-- TWITTER / X CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Repórter Ofertas — Notícias e Achados">
+    <meta name="twitter:description" content="Notícias do dia com recomendações de produtos e ofertas selecionadas.">
+    <meta name="twitter:image" content="https://reporterofertas.com.br/imagens/og-banner.png">
+
+    <link rel="canonical" href="https://reporterofertas.com.br/">
+
     <meta name="google-adsense-account" content="ca-pub-9865739637958097">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9865739637958097"
      crossorigin="anonymous"></script>
@@ -119,6 +146,76 @@
         .perfil-form textarea { min-height:80px; resize:vertical; }
         .perfil-salvar { border:none; border-radius:9px; padding:12px; background:#ffd54a; color:#000; font-weight:bold; cursor:pointer; margin-top:5px; }
         .perfil-dica { color:#777; font-size:11px; line-height:1.4; }
+
+        /* FILTRO DE CATEGORIAS (filtra os posts do próprio site) */
+        .filtro-categorias {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 12px 12px 0;
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+        }
+        .filtro-categorias::-webkit-scrollbar { display: none; }
+        .filtro-pill {
+            flex: 0 0 auto;
+            border: 1px solid #2b2b2b;
+            background: #141414;
+            color: #ccc;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 999px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: background .15s ease, border-color .15s ease, color .15s ease;
+        }
+        .filtro-pill:hover { border-color: #3a3a3a; }
+        .filtro-pill.ativo {
+            background: #ffd54a;
+            border-color: #ffd54a;
+            color: #000;
+        }
+        .filtro-vazio {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+            color: #777;
+            font-size: 14px;
+            display: none;
+        }
+
+        /* BOTÃO VOLTAR AO TOPO */
+        .btn-topo {
+            position: fixed;
+            right: 18px;
+            bottom: 90px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid #2b2b2b;
+            background: #171717;
+            color: #ffd54a;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(10px);
+            transition: opacity .2s ease, transform .2s ease;
+            z-index: 500;
+        }
+        .btn-topo.visivel {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+        .btn-topo:hover { background: #1f1f1f; }
 
         /* FEED */
         .feed {
@@ -623,6 +720,12 @@
     </div>
     <div class="status-conexao"></div>
 
+    <!-- FILTRO DE CATEGORIAS (filtra os posts aqui dentro do site) -->
+    <nav class="filtro-categorias" id="filtroCategorias" aria-label="Filtrar por categoria">
+        <button type="button" class="filtro-pill ativo" data-filtro="todos" onclick="filtrarPorCategoria('todos', this)">Todos</button>
+    </nav>
+    <div class="filtro-vazio" id="filtroVazio">Nenhum post nessa categoria ainda.</div>
+
     <div class="perfil-modal" id="perfilModal" onclick="fecharPerfilFora(event)">
         <div class="perfil-caixa">
             <div class="perfil-cabecalho">
@@ -807,7 +910,7 @@
 </article>
 
         <!-- NOTÍCIA 1 -->
-        <article class="post-card" data-post-id="post-1">
+        <article class="post-card" data-post-id="post-1" data-publicado="2026-08-14">
             <div class="post-capa" style="position:relative;">
                 <span class="post-categoria">Esportes</span>
                 <div class="post-capa-carrossel">
@@ -887,7 +990,7 @@
         </article>
 
         <!-- NOTÍCIA 2 -->
-        <article class="post-card" data-post-id="post-2">
+        <article class="post-card" data-post-id="post-2" data-publicado="2026-08-13">
             <div class="post-capa">
                 <span class="post-categoria">Tecnologia</span>
                 <img src="imagens/produto-liquidificador-mondial.png" alt="Liquidificador Mondial preto com jarra transparente cheia de frutas" style="display:block;">
@@ -939,7 +1042,7 @@
         </article>
 
         <!-- NOTÍCIA 3 -->
-        <article class="post-card" data-post-id="post-3">
+        <article class="post-card" data-post-id="post-3" data-publicado="2026-08-12">
             <div class="post-capa">
                 <span class="post-categoria">Casa</span>
                 <img src="imagens/01-jogo-panelas-granito.png" alt="Jogo de panelas antiaderente granito" style="display:block;">
@@ -980,7 +1083,7 @@
         </article>
 
         <!-- NOTÍCIA 4 -->
-        <article class="post-card" data-post-id="post-4">
+        <article class="post-card" data-post-id="post-4" data-publicado="2026-08-11">
             <div class="post-capa">
                 <span class="post-categoria">Tecnologia</span>
                 <img src="imagens/02-robo-aspirador-xiaomi.png" alt="Robô aspirador de pó branco" style="display:block;">
@@ -1021,7 +1124,7 @@
         </article>
 
         <!-- NOTÍCIA 5 -->
-        <article class="post-card" data-post-id="post-5">
+        <article class="post-card" data-post-id="post-5" data-publicado="2026-08-10">
             <div class="post-capa">
                 <span class="post-categoria">Tecnologia</span>
                 <img src="imagens/03-smart-tv-philco-roku.png" alt="Smart TV Philco com Roku TV" style="display:block;">
@@ -1062,7 +1165,7 @@
         </article>
 
         <!-- NOTÍCIA 6 -->
-        <article class="post-card" data-post-id="post-6">
+        <article class="post-card" data-post-id="post-6" data-publicado="2026-08-09">
             <div class="post-capa">
                 <span class="post-categoria">Beleza</span>
                 <img src="imagens/04-gloss-labial-mel.png" alt="Gloss labial em formato de colmeia" style="display:block;">
@@ -1103,7 +1206,7 @@
         </article>
 
         <!-- NOTÍCIA 7 -->
-        <article class="post-card" data-post-id="post-7">
+        <article class="post-card" data-post-id="post-7" data-publicado="2026-08-08">
             <div class="post-capa">
                 <span class="post-categoria">Casa</span>
                 <img src="imagens/05-air-fryer-forno-digital.png" alt="Air fryer forno digital com circulação de ar 360 graus" style="display:block;">
@@ -1144,7 +1247,7 @@
         </article>
 
         <!-- NOTÍCIA 8 -->
-        <article class="post-card" data-post-id="post-8">
+        <article class="post-card" data-post-id="post-8" data-publicado="2026-08-07">
             <div class="post-capa">
                 <span class="post-categoria">Esportes</span>
                 <img src="imagens/06-bicicleta-spinning-brusfit.png" alt="Bicicleta ergométrica de spinning preta e vermelha" style="display:block;">
@@ -1185,7 +1288,7 @@
         </article>
 
         <!-- NOTÍCIA 9 -->
-        <article class="post-card" data-post-id="post-9">
+        <article class="post-card" data-post-id="post-9" data-publicado="2026-08-06">
             <div class="post-capa">
                 <span class="post-categoria">Saúde</span>
                 <img src="imagens/07-balanca-bioimpedancia-rhead.png" alt="Balança digital de bioimpedância" style="display:block;">
@@ -1226,7 +1329,7 @@
         </article>
 
         <!-- NOTÍCIA 10 -->
-        <article class="post-card" data-post-id="post-10">
+        <article class="post-card" data-post-id="post-10" data-publicado="2026-08-05">
             <div class="post-capa">
                 <span class="post-categoria">Casa</span>
                 <img src="imagens/08-kit-fraldas-pano-estampado.png" alt="Kit de fraldas de pano estampadas" style="display:block;">
@@ -1269,7 +1372,7 @@ Além de bonitos, os panos são ótimos para o dia a dia. Você pode usar para s
         </article>
 
         <!-- NOTÍCIA 11 -->
-        <article class="post-card" data-post-id="post-11">
+        <article class="post-card" data-post-id="post-11" data-publicado="2026-08-04">
             <div class="post-capa">
                 <span class="post-categoria">Tecnologia</span>
                 <img src="imagens/09-bicicleta-eletrica-laf-l40-plus.png" alt="Bicicleta elétrica LAF L40 Plus" style="display:block;">
@@ -1310,7 +1413,7 @@ Além de bonitos, os panos são ótimos para o dia a dia. Você pode usar para s
         </article>
 
         <!-- NOTÍCIA 12 -->
-        <article class="post-card" data-post-id="post-12">
+        <article class="post-card" data-post-id="post-12" data-publicado="2026-08-03">
             <div class="post-capa">
                 <span class="post-categoria">Casa</span>
                 <img src="imagens/10-microondas-panasonic.png" alt="Micro-ondas Panasonic preto" style="display:block;">
@@ -1351,7 +1454,7 @@ Além de bonitos, os panos são ótimos para o dia a dia. Você pode usar para s
         </article>
 
         <!-- NOTÍCIA 13 -->
-        <article class="post-card" data-post-id="post-13">
+        <article class="post-card" data-post-id="post-13" data-publicado="2026-08-02">
             <div class="post-capa">
                 <span class="post-categoria">Tecnologia</span>
                 <img src="imagens/11-projetor-rhed-android.png" alt="Projetor portátil RHED com Android" style="display:block;">
@@ -1393,7 +1496,7 @@ Além de bonitos, os panos são ótimos para o dia a dia. Você pode usar para s
         </article>
 
         <!-- NOTÍCIA 14 -->
-        <article class="post-card" data-post-id="post-14">
+        <article class="post-card" data-post-id="post-14" data-publicado="2026-08-01">
             <div class="post-capa">
                 <span class="post-categoria">Beleza</span>
                 <img src="imagens/12-secador-taiff-tourmaline-2100w.png" alt="Secador de cabelo Taiff Tourmaline Ion" style="display:block;">
@@ -1434,7 +1537,7 @@ Além de bonitos, os panos são ótimos para o dia a dia. Você pode usar para s
         </article>
 
         <!-- NOTÍCIA 15 -->
-        <article class="post-card" data-post-id="post-15">
+        <article class="post-card" data-post-id="post-15" data-publicado="2026-07-31">
             <div class="post-capa">
                 <span class="post-categoria">Casa</span>
                 <img src="imagens/13-espelho-redondo-adnet-couro.png" alt="Espelho redondo com alça de couro" style="display:block;">
@@ -2252,18 +2355,128 @@ Além de bonitos, os panos são ótimos para o dia a dia. Você pode usar para s
     (function () {
         "use strict";
 
-        // Quantos cards já aparecem quando o cliente abre o site,
-        // e quantos a mais surgem a cada clique em "Ver mais".
         var VISIVEIS_NO_INICIO = 5;
         var CARREGAR_POR_VEZ = 5;
 
-        function iniciarCarregamentoProgressivo() {
-            var cards = Array.prototype.slice.call(document.querySelectorAll(".feed > .post-card"));
+        var cards = [];
+        var filtroAtualCategoria = "todos";
+
+        // ---------- DATAS RELATIVAS ("hoje", "ontem", "há X dias") ----------
+        function formatarDataRelativa(iso) {
+            var partes = iso.split("-").map(Number);
+            var dataPost = new Date(partes[0], partes[1] - 1, partes[2]);
+            var hoje = new Date();
+            hoje.setHours(0, 0, 0, 0);
+            dataPost.setHours(0, 0, 0, 0);
+
+            var diffMs = hoje - dataPost;
+            var diffDias = Math.round(diffMs / 86400000);
+
+            if (diffDias <= 0) return "hoje";
+            if (diffDias === 1) return "ontem";
+            if (diffDias < 7) return "há " + diffDias + " dias";
+            var semanas = Math.round(diffDias / 7);
+            if (diffDias < 30) return semanas === 1 ? "há 1 semana" : "há " + semanas + " semanas";
+            var meses = Math.round(diffDias / 30);
+            return meses === 1 ? "há 1 mês" : "há " + meses + " meses";
+        }
+
+        function aplicarDatas() {
+            cards.forEach(function (card) {
+                var iso = card.getAttribute("data-publicado");
+                if (!iso) return;
+                var meta = card.querySelector(".post-meta");
+                if (!meta || meta.querySelector(".data-relativa")) return;
+                var span = document.createElement("span");
+                span.className = "data-relativa";
+                span.textContent = " · " + formatarDataRelativa(iso);
+                meta.appendChild(span);
+            });
+        }
+
+        // ---------- FILTRO DE CATEGORIAS ----------
+        function categoriaDoCard(card) {
+            var el = card.querySelector(".post-categoria");
+            return el ? el.textContent.trim() : "";
+        }
+
+        function montarFiltros() {
+            var nav = document.getElementById("filtroCategorias");
+            if (!nav) return;
+
+            var vistas = {};
+            var ordem = [];
+            cards.forEach(function (card) {
+                var cat = categoriaDoCard(card);
+                if (cat && !vistas[cat]) {
+                    vistas[cat] = true;
+                    ordem.push(cat);
+                }
+            });
+
+            ordem.forEach(function (cat) {
+                var btn = document.createElement("button");
+                btn.type = "button";
+                btn.className = "filtro-pill";
+                btn.textContent = cat;
+                btn.setAttribute("data-filtro", cat);
+                btn.onclick = function () { filtrarPorCategoria(cat, btn); };
+                nav.appendChild(btn);
+            });
+        }
+
+        window.filtrarPorCategoria = function (categoria, btnClicado) {
+            filtroAtualCategoria = categoria;
+
+            document.querySelectorAll(".filtro-pill").forEach(function (b) {
+                b.classList.toggle("ativo", b === btnClicado);
+            });
+
+            var vazio = document.getElementById("filtroVazio");
+            var algumaCorresponde = false;
+
+            if (categoria === "todos") {
+                cards.forEach(function (card) { card.style.display = ""; });
+                if (vazio) vazio.style.display = "none";
+                atualizarBotaoVerMais();
+                return;
+            }
+
+            cards.forEach(function (card) {
+                var corresponde = categoriaDoCard(card) === categoria;
+                card.style.display = corresponde ? "" : "none";
+                if (corresponde) algumaCorresponde = true;
+            });
+
+            var wrap = document.getElementById("carregarMaisWrap");
+            if (wrap) wrap.style.display = "none";
+            if (vazio) vazio.style.display = algumaCorresponde ? "none" : "block";
+        };
+
+        // ---------- CARREGAMENTO PROGRESSIVO ----------
+        function atualizarBotaoVerMais() {
             var wrap = document.getElementById("carregarMaisWrap");
             var contador = document.getElementById("contadorRestantes");
-
-            if (cards.length <= VISIVEIS_NO_INICIO) {
+            if (filtroAtualCategoria !== "todos") {
                 if (wrap) wrap.style.display = "none";
+                return;
+            }
+            var restantes = cards.filter(function (c) {
+                return c.classList.contains("oculto-inicial");
+            }).length;
+
+            if (restantes <= 0) {
+                if (wrap) wrap.style.display = "none";
+                return;
+            }
+            if (wrap) wrap.style.display = "";
+            if (contador) contador.textContent = "(" + restantes + ")";
+        }
+
+        function iniciarCarregamentoProgressivo() {
+            if (cards.length <= VISIVEIS_NO_INICIO) {
+                var wrap0 = document.getElementById("carregarMaisWrap");
+                if (wrap0) wrap0.style.display = "none";
                 return;
             }
 
@@ -2273,36 +2486,43 @@ Além de bonitos, os panos são ótimos para o dia a dia. Você pode usar para s
                 }
             });
 
-            function atualizarContador() {
-                var restantes = cards.filter(function (c) {
-                    return c.classList.contains("oculto-inicial");
-                }).length;
-
-                if (restantes <= 0) {
-                    if (wrap) wrap.style.display = "none";
-                    return;
-                }
-                if (contador) contador.textContent = "(" + restantes + ")";
-            }
-
             window.carregarMaisPosts = function () {
                 var ocultos = cards.filter(function (c) {
                     return c.classList.contains("oculto-inicial");
                 });
-
                 ocultos.slice(0, CARREGAR_POR_VEZ).forEach(function (card) {
                     card.classList.remove("oculto-inicial");
                 });
-
-                atualizarContador();
+                atualizarBotaoVerMais();
             };
 
-            atualizarContador();
+            atualizarBotaoVerMais();
         }
 
-        document.addEventListener("DOMContentLoaded", iniciarCarregamentoProgressivo);
+        // ---------- BOTÃO VOLTAR AO TOPO ----------
+        function iniciarBotaoTopo() {
+            var btn = document.getElementById("btnTopo");
+            if (!btn) return;
+            window.addEventListener("scroll", function () {
+                btn.classList.toggle("visivel", window.scrollY > 700);
+            }, { passive: true });
+            btn.addEventListener("click", function () {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            cards = Array.prototype.slice.call(document.querySelectorAll(".feed > .post-card"));
+            aplicarDatas();
+            montarFiltros();
+            iniciarCarregamentoProgressivo();
+            iniciarBotaoTopo();
+        });
     })();
     </script>
+
+    <!-- BOTÃO VOLTAR AO TOPO -->
+    <button type="button" class="btn-topo" id="btnTopo" aria-label="Voltar ao topo">↑</button>
 
     <!-- BOTÕES FLUTUANTES: WHATSAPP + INSTAGRAM -->
     <div class="botoes-flutuantes">
