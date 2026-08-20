@@ -710,6 +710,75 @@
 
     <main class="feed">
 
+        <!--
+  ===========================================================================
+  POST: DO ZERO AO PRIMEIRO PRODUTO DIGITAL (PRODUTO PRÓPRIO — EBOOK)
+  ===========================================================================
+  COMO USAR:
+  1) Suba as imagens "post_capa_1200x675.png" e "afiliado_thumb_240x240.png"
+     dentro da pasta /imagens do site (mesma pasta onde estão as outras fotos).
+  2) Suba também o arquivo "do-zero-ao-primeiro-produto-digital.html" na raiz
+     do site (fora da pasta /imagens), junto com index.html, sobre.html etc.
+  3) Abra o index.html do site, localize a linha:
+        <main class="feed">
+     e cole este bloco inteiro logo depois dela (antes do primeiro <article>
+     já existente), para o post aparecer em primeiro no feed.
+  4) EDITAR: troque o href do botão abaixo (marcado com EDITAR:) pelo link
+     de checkout copiado na Kiwify, ou mantenha apontando para a página de
+     vendas completa — os dois funcionam, o segundo costuma converter melhor.
+  ===========================================================================
+-->
+<article class="post-card" data-post-id="post-ebook-01" data-publicado="2026-08-20">
+    <div class="post-capa" style="position:relative;">
+        <span class="post-categoria">Empreendedorismo Digital</span>
+        <img src="imagens/post_capa_1200x675.png" alt="Capa do ebook Do Zero ao Primeiro Produto Digital" style="display:block;">
+    </div>
+    <div class="info">
+        <h2>Lancei um guia prático: como criar seu ebook no Canva e vender na Kiwify, Hotmart e Kirvano</h2>
+        <div class="post-meta">Empreendedorismo Digital · Produto Próprio · 2 min de leitura</div>
+        <p class="post-texto">
+            Reunimos em um guia único o passo a passo completo para quem quer criar sua primeira
+            fonte de renda digital: planejamento de conteúdo, diagramação do ebook no Canva e o
+            cadastro certinho nas três maiores plataformas de venda de infoprodutos do Brasil.
+            Um material direto ao ponto, para quem nunca publicou nada e quer sair do zero.
+        </p>
+    </div>
+
+    <div class="afiliado-bloco">
+        <img class="afiliado-imagem" src="imagens/afiliado_thumb_240x240.png" alt="Do Zero ao Primeiro Produto Digital" style="object-fit:cover;">
+        <div class="afiliado-detalhes">
+            <div class="afiliado-nome">Do Zero ao Primeiro Produto Digital — Ebook + Guia Kiwify, Hotmart e Kirvano</div>
+            <span class="afiliado-preco">R$ 47,00 à vista no Pix, ou em até 12x no cartão</span>
+            <!-- EDITAR: pode apontar direto para o checkout da Kiwify, ou para a página de vendas completa -->
+            <a class="afiliado-btn" href="do-zero-ao-primeiro-produto-digital.html">Conhecer o guia →</a>
+        </div>
+    </div>
+    <div class="afiliado-aviso">📘 Produto próprio do Repórter Ofertas. Ao comprar, você apoia diretamente este site.</div>
+
+    <div class="acoes">
+        <button class="acao curtir" onclick="curtir(this)" aria-label="Curtir">
+            <span class="coracao">❤️</span>
+            <span class="contador">0</span>
+        </button>
+        <button class="acao" onclick="abrirComentarios(this)" aria-label="Comentários">
+            💬
+            <span class="contador-comentarios">0</span>
+        </button>
+        <button class="acao" onclick="compartilhar(this)" aria-label="Compartilhar">↗️</button>
+    </div>
+
+    <div class="comentarios">
+        <div class="campo-comentario">
+            <div class="comentando-como"><span class="cc-rotulo">Comentando como</span> <span class="cc-avatar-inline"></span><span class="cc-nome-inline">Leitor</span> <button type="button" class="cc-trocar" onclick="abrirPerfil()">trocar</button></div>
+            <input type="text" class="texto-comentario-input" placeholder="Escreva um comentário..." maxlength="200">
+            <button type="button" onclick="publicarComentario(this)">Publicar</button>
+        </div>
+        <div class="lista-comentarios">
+            <div class="sem-comentarios">Nenhum comentário ainda.</div>
+        </div>
+    </div>
+</article>
+
         <!-- PRODUTO: LANTERNA LED UV LUZ NEGRA (AMAZON) -->
 <article class="post-card" data-post-id="post-24" data-publicado="2026-08-16">
     <div class="post-capa" style="position:relative;">
