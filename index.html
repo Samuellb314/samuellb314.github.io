@@ -90,63 +90,6 @@
         }
         .site-nav a:hover { color: #fff; background: #222; }
 
-        /* PERFIL DO USUÁRIO */
-        .perfil-avatar {
-            width: 38px;
-            height: 38px;
-            min-width: 38px;
-            border-radius: 50%;
-            background: #222;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            overflow: hidden;
-        }
-        .perfil-btn {
-            border: none;
-            border-radius: 9px;
-            padding: 9px 12px;
-            background: #222;
-            color: #fff;
-            cursor: pointer;
-            font-size: 13px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .perfil-modal {
-            display: none;
-            position: fixed;
-            inset: 0;
-            z-index: 100;
-            background: rgba(0,0,0,.75);
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-        .perfil-modal.aberto { display: flex; }
-        .perfil-caixa {
-            width: 100%;
-            max-width: 420px;
-            background: #141414;
-            border: 1px solid #2b2b2b;
-            border-radius: 16px;
-            padding: 20px;
-            box-shadow: 0 15px 50px rgba(0,0,0,.5);
-        }
-        .perfil-cabecalho { display:flex; align-items:center; justify-content:space-between; margin-bottom: 18px; }
-        .perfil-cabecalho h2 { font-size: 20px; }
-        .perfil-fechar { border: none; background: transparent; color:#aaa; font-size:24px; cursor:pointer; }
-        .perfil-form { display:flex; flex-direction:column; gap:10px; }
-        .perfil-form label { color:#aaa; font-size:12px; }
-        .perfil-form input, .perfil-form textarea {
-            width:100%; padding:12px; border:none; border-radius:9px; background:#222; color:#fff; outline:none;
-        }
-        .perfil-form textarea { min-height:80px; resize:vertical; }
-        .perfil-salvar { border:none; border-radius:9px; padding:12px; background:#ffd54a; color:#000; font-weight:bold; cursor:pointer; margin-top:5px; }
-        .perfil-dica { color:#777; font-size:11px; line-height:1.4; }
-
         /* FILTRO DE CATEGORIAS (filtra os posts do próprio site) */
         .filtro-categorias {
             max-width: 640px;
@@ -433,29 +376,6 @@
             outline: none;
         }
         .campo-comentario input::placeholder { color: #888; }
-        .comentando-como {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 12px;
-            color: #999;
-            background: #1a1a1a;
-            border: 1px solid #262626;
-            border-radius: 8px;
-            padding: 8px 10px;
-        }
-        .comentando-como .cc-rotulo { color: #777; }
-        .comentando-como .cc-avatar-inline { font-size: 14px; }
-        .comentando-como .cc-nome-inline { color: #fff; font-weight: 600; }
-        .comentando-como .cc-trocar {
-            margin-left: auto;
-            border: none;
-            background: transparent;
-            color: #ffd54a;
-            font-size: 11.5px;
-            cursor: pointer;
-            padding: 2px 4px;
-        }
         .status-conexao {
             text-align: center;
             font-size: 11.5px;
@@ -662,9 +582,6 @@
     <header class="site-header">
         <div class="site-header-topo">
             <div class="site-logo">Repórter<span>Ofertas</span></div>
-            <button type="button" class="perfil-btn" onclick="abrirPerfil()" aria-label="Abrir perfil">
-                <span id="perfilNomeTopo">Perfil</span>
-            </button>
         </div>
         <nav class="site-nav">
             <a href="index.html">Início</a>
@@ -685,28 +602,6 @@
         <button type="button" class="filtro-pill ativo" data-filtro="todos" onclick="filtrarPorCategoria('todos', this)">Todos</button>
     </nav>
     <div class="filtro-vazio" id="filtroVazio">Nenhum post nessa categoria ainda.</div>
-
-    <div class="perfil-modal" id="perfilModal" onclick="fecharPerfilFora(event)">
-        <div class="perfil-caixa">
-            <div class="perfil-cabecalho">
-                <h2>Meu perfil</h2>
-                <button type="button" class="perfil-fechar" onclick="fecharPerfil()" aria-label="Fechar">×</button>
-            </div>
-            <div class="perfil-form">
-                <label for="perfilNomeInput">Nome</label>
-                <input id="perfilNomeInput" type="text" maxlength="30" placeholder="Seu nome">
-
-                <label for="perfilBioInput">Bio</label>
-                <textarea id="perfilBioInput" maxlength="120" placeholder="Fale um pouco sobre você"></textarea>
-
-                <label for="perfilAvatarInput">Avatar (emoji)</label>
-                <input id="perfilAvatarInput" type="text" maxlength="4" placeholder="👤">
-
-                <div class="perfil-dica">Seu perfil fica salvo na nuvem, vinculado a este navegador. O nome e avatar serão usados automaticamente quando você comentar ou curtir.</div>
-                <button type="button" class="perfil-salvar" onclick="salvarPerfil()">Salvar perfil</button>
-            </div>
-        </div>
-    </div>
 
     <main class="feed">
 
@@ -769,7 +664,7 @@
 
     <div class="comentarios">
         <div class="campo-comentario">
-            <div class="comentando-como"><span class="cc-rotulo">Comentando como</span> <span class="cc-avatar-inline"></span><span class="cc-nome-inline">Leitor</span> <button type="button" class="cc-trocar" onclick="abrirPerfil()">trocar</button></div>
+            
             <input type="text" class="texto-comentario-input" placeholder="Escreva um comentário..." maxlength="200">
             <button type="button" onclick="publicarComentario(this)">Publicar</button>
         </div>
@@ -838,7 +733,7 @@
 
     <div class="comentarios">
         <div class="campo-comentario">
-            <div class="comentando-como"><span class="cc-rotulo">Comentando como</span> <span class="cc-avatar-inline"></span><span class="cc-nome-inline">Leitor</span> <button type="button" class="cc-trocar" onclick="abrirPerfil()">trocar</button></div>
+            
             <input type="text" class="texto-comentario-input" placeholder="Escreva um comentário..." maxlength="200">
             <button type="button" onclick="publicarComentario(this)">Publicar</button>
         </div>
@@ -910,7 +805,7 @@
 
     <div class="comentarios">
         <div class="campo-comentario">
-            <div class="comentando-como"><span class="cc-rotulo">Comentando como</span> <span class="cc-avatar-inline"></span><span class="cc-nome-inline">Leitor</span> <button type="button" class="cc-trocar" onclick="abrirPerfil()">trocar</button></div>
+            
             <input type="text" class="texto-comentario-input" placeholder="Escreva um comentário..." maxlength="200">
             <button type="button" onclick="publicarComentario(this)">Publicar</button>
         </div>
@@ -979,7 +874,7 @@
 
     <div class="comentarios">
         <div class="campo-comentario">
-            <div class="comentando-como"><span class="cc-rotulo">Comentando como</span> <span class="cc-avatar-inline"></span><span class="cc-nome-inline">Leitor</span> <button type="button" class="cc-trocar" onclick="abrirPerfil()">trocar</button></div>
+            
             <input type="text" class="texto-comentario-input" placeholder="Escreva um comentário..." maxlength="200">
             <button type="button" onclick="publicarComentario(this)">Publicar</button>
         </div>
@@ -1024,7 +919,7 @@
     </div>
     <div class="comentarios">
         <div class="campo-comentario">
-            <div class="comentando-como"><span class="cc-rotulo">Comentando como</span> <span class="cc-avatar-inline"></span><span class="cc-nome-inline">Leitor</span> <button type="button" class="cc-trocar" onclick="abrirPerfil()">trocar</button></div>
+            
             <input type="text" class="texto-comentario-input" placeholder="Escreva um comentário..." maxlength="200">
             <button type="button" onclick="publicarComentario(this)">Publicar</button>
         </div>
@@ -1066,7 +961,7 @@
     </div>
     <div class="comentarios">
         <div class="campo-comentario">
-            <div class="comentando-como"><span class="cc-rotulo">Comentando como</span> <span class="cc-avatar-inline"></span><span class="cc-nome-inline">Leitor</span> <button type="button" class="cc-trocar" onclick="abrirPerfil()">trocar</button></div>
+            
             <input type="text" class="texto-comentario-input" placeholder="Escreva um comentário..." maxlength="200">
             <button type="button" onclick="publicarComentario(this)">Publicar</button>
         </div>
@@ -1132,7 +1027,7 @@
 
     <div class="comentarios">
         <div class="campo-comentario">
-            <div class="comentando-como"><span class="cc-rotulo">Comentando como</span> <span class="cc-avatar-inline"></span><span class="cc-nome-inline">Leitor</span> <button type="button" class="cc-trocar" onclick="abrirPerfil()">trocar</button></div>
+            
             <input type="text" class="texto-comentario-input" placeholder="Escreva um comentário..." maxlength="200">
             <button type="button" onclick="publicarComentario(this)">Publicar</button>
         </div>
@@ -1208,7 +1103,7 @@
     </div>
     <div class="comentarios">
         <div class="campo-comentario">
-            <div class="comentando-como"><span class="cc-rotulo">Comentando como</span> <span class="cc-avatar-inline"></span><span class="cc-nome-inline">Leitor</span> <button type="button" class="cc-trocar" onclick="abrirPerfil()">trocar</button></div>
+            
             <input type="text" class="texto-comentario-input" placeholder="Escreva um comentário..." maxlength="200">
             <button type="button" onclick="publicarComentario(this)">Publicar</button>
         </div>
@@ -1286,7 +1181,7 @@
 
             <div class="comentarios">
                 <div class="campo-comentario">
-                    <div class="comentando-como"><span class="cc-rotulo">Comentando como</span> <span class="cc-avatar-inline"></span><span class="cc-nome-inline">Leitor</span> <button type="button" class="cc-trocar" onclick="abrirPerfil()">trocar</button></div>
+                    
                     <input type="text" class="texto-comentario-input" placeholder="Escreva um comentário..." maxlength="200">
                     <button type="button" onclick="publicarComentario(this)">Publicar</button>
                 </div>
@@ -1338,7 +1233,7 @@
 
             <div class="comentarios">
                 <div class="campo-comentario">
-                    <div class="comentando-como"><span class="cc-rotulo">Comentando como</span> <span class="cc-avatar-inline"></span><span class="cc-nome-inline">Leitor</span> <button type="button" class="cc-trocar" onclick="abrirPerfil()">trocar</button></div>
+                    
                     <input type="text" class="texto-comentario-input" placeholder="Escreva um comentário..." maxlength="200">
                     <button type="button" onclick="publicarComentario(this)">Publicar</button>
                 </div>
@@ -1381,7 +1276,7 @@
             </div>
             <div class="comentarios">
                 <div class="campo-comentario">
-                    <div class="comentando-como"><span class="cc-rotulo">Comentando como</span> <span class="cc-avatar-inline"></span><span class="cc-nome-inline">Leitor</span> <button type="button" class="cc-trocar" onclick="abrirPerfil()">trocar</button></div>
+                    
                     <input type="text" class="texto-comentario-input" placeholder="Escreva um comentário..." maxlength="200">
                     <button type="button" onclick="publicarComentario(this)">Publicar</button>
                 </div>
@@ -1422,7 +1317,7 @@
             </div>
             <div class="comentarios">
                 <div class="campo-comentario">
-                    <div class="comentando-como"><span class="cc-rotulo">Comentando como</span> <span class="cc-avatar-inline"></span><span class="cc-nome-inline">Leitor</span> <button type="button" class="cc-trocar" onclick="abrirPerfil()">trocar</button></div>
+                    
                     <input type="text" class="texto-comentario-input" placeholder="Escreva um comentário..." maxlength="200">
                     <button type="button" onclick="publicarComentario(this)">Publicar</button>
                 </div>
@@ -1463,7 +1358,7 @@
             </div>
             <div class="comentarios">
                 <div class="campo-comentario">
-                    <div class="comentando-como"><span class="cc-rotulo">Comentando como</span> <span class="cc-avatar-inline"></span><span class="cc-nome-inline">Leitor</span> <button type="button" class="cc-trocar" onclick="abrirPerfil()">trocar</button></div>
+                    
                     <input type="text" class="texto-comentario-input" placeholder="Escreva um comentário..." maxlength="200">
                     <button type="button" onclick="publicarComentario(this)">Publicar</button>
                 </div>
@@ -1504,7 +1399,7 @@
             </div>
             <div class="comentarios">
                 <div class="campo-comentario">
-                    <div class="comentando-como"><span class="cc-rotulo">Comentando como</span> <span class="cc-avatar-inline"></span><span class="cc-nome-inline">Leitor</span> <button type="button" class="cc-trocar" onclick="abrirPerfil()">trocar</button></div>
+                    
                     <input type="text" class="texto-comentario-input" placeholder="Escreva um comentário..." maxlength="200">
                     <button type="button" onclick="publicarComentario(this)">Publicar</button>
                 </div>
@@ -1545,7 +1440,7 @@
             </div>
             <div class="comentarios">
                 <div class="campo-comentario">
-                    <div class="comentando-como"><span class="cc-rotulo">Comentando como</span> <span class="cc-avatar-inline"></span><span class="cc-nome-inline">Leitor</span> <button type="button" class="cc-trocar" onclick="abrirPerfil()">trocar</button></div>
+                    
                     <input type="text" class="texto-comentario-input" placeholder="Escreva um comentário..." maxlength="200">
                     <button type="button" onclick="publicarComentario(this)">Publicar</button>
                 </div>
@@ -1586,7 +1481,7 @@
             </div>
             <div class="comentarios">
                 <div class="campo-comentario">
-                    <div class="comentando-como"><span class="cc-rotulo">Comentando como</span> <span class="cc-avatar-inline"></span><span class="cc-nome-inline">Leitor</span> <button type="button" class="cc-trocar" onclick="abrirPerfil()">trocar</button></div>
+                    
                     <input type="text" class="texto-comentario-input" placeholder="Escreva um comentário..." maxlength="200">
                     <button type="button" onclick="publicarComentario(this)">Publicar</button>
                 </div>
@@ -1627,7 +1522,7 @@
             </div>
             <div class="comentarios">
                 <div class="campo-comentario">
-                    <div class="comentando-como"><span class="cc-rotulo">Comentando como</span> <span class="cc-avatar-inline"></span><span class="cc-nome-inline">Leitor</span> <button type="button" class="cc-trocar" onclick="abrirPerfil()">trocar</button></div>
+                    
                     <input type="text" class="texto-comentario-input" placeholder="Escreva um comentário..." maxlength="200">
                     <button type="button" onclick="publicarComentario(this)">Publicar</button>
                 </div>
@@ -1670,7 +1565,7 @@ Além de bonitos, os panos são ótimos para o dia a dia. Você pode usar para s
             </div>
             <div class="comentarios">
                 <div class="campo-comentario">
-                    <div class="comentando-como"><span class="cc-rotulo">Comentando como</span> <span class="cc-avatar-inline"></span><span class="cc-nome-inline">Leitor</span> <button type="button" class="cc-trocar" onclick="abrirPerfil()">trocar</button></div>
+                    
                     <input type="text" class="texto-comentario-input" placeholder="Escreva um comentário..." maxlength="200">
                     <button type="button" onclick="publicarComentario(this)">Publicar</button>
                 </div>
@@ -1711,7 +1606,7 @@ Além de bonitos, os panos são ótimos para o dia a dia. Você pode usar para s
             </div>
             <div class="comentarios">
                 <div class="campo-comentario">
-                    <div class="comentando-como"><span class="cc-rotulo">Comentando como</span> <span class="cc-avatar-inline"></span><span class="cc-nome-inline">Leitor</span> <button type="button" class="cc-trocar" onclick="abrirPerfil()">trocar</button></div>
+                    
                     <input type="text" class="texto-comentario-input" placeholder="Escreva um comentário..." maxlength="200">
                     <button type="button" onclick="publicarComentario(this)">Publicar</button>
                 </div>
@@ -1752,7 +1647,7 @@ Além de bonitos, os panos são ótimos para o dia a dia. Você pode usar para s
             </div>
             <div class="comentarios">
                 <div class="campo-comentario">
-                    <div class="comentando-como"><span class="cc-rotulo">Comentando como</span> <span class="cc-avatar-inline"></span><span class="cc-nome-inline">Leitor</span> <button type="button" class="cc-trocar" onclick="abrirPerfil()">trocar</button></div>
+                    
                     <input type="text" class="texto-comentario-input" placeholder="Escreva um comentário..." maxlength="200">
                     <button type="button" onclick="publicarComentario(this)">Publicar</button>
                 </div>
@@ -1794,7 +1689,7 @@ Além de bonitos, os panos são ótimos para o dia a dia. Você pode usar para s
             </div>
             <div class="comentarios">
                 <div class="campo-comentario">
-                    <div class="comentando-como"><span class="cc-rotulo">Comentando como</span> <span class="cc-avatar-inline"></span><span class="cc-nome-inline">Leitor</span> <button type="button" class="cc-trocar" onclick="abrirPerfil()">trocar</button></div>
+                    
                     <input type="text" class="texto-comentario-input" placeholder="Escreva um comentário..." maxlength="200">
                     <button type="button" onclick="publicarComentario(this)">Publicar</button>
                 </div>
@@ -1835,7 +1730,7 @@ Além de bonitos, os panos são ótimos para o dia a dia. Você pode usar para s
             </div>
             <div class="comentarios">
                 <div class="campo-comentario">
-                    <div class="comentando-como"><span class="cc-rotulo">Comentando como</span> <span class="cc-avatar-inline"></span><span class="cc-nome-inline">Leitor</span> <button type="button" class="cc-trocar" onclick="abrirPerfil()">trocar</button></div>
+                    
                     <input type="text" class="texto-comentario-input" placeholder="Escreva um comentário..." maxlength="200">
                     <button type="button" onclick="publicarComentario(this)">Publicar</button>
                 </div>
@@ -1876,7 +1771,7 @@ Além de bonitos, os panos são ótimos para o dia a dia. Você pode usar para s
             </div>
             <div class="comentarios">
                 <div class="campo-comentario">
-                    <div class="comentando-como"><span class="cc-rotulo">Comentando como</span> <span class="cc-avatar-inline"></span><span class="cc-nome-inline">Leitor</span> <button type="button" class="cc-trocar" onclick="abrirPerfil()">trocar</button></div>
+                    
                     <input type="text" class="texto-comentario-input" placeholder="Escreva um comentário..." maxlength="200">
                     <button type="button" onclick="publicarComentario(this)">Publicar</button>
                 </div>
@@ -1950,10 +1845,9 @@ Além de bonitos, os panos são ótimos para o dia a dia. Você pode usar para s
 (function () {
     "use strict";
 
-    var PROFILE_KEY_LOCAL = "sitePerfilUsuarioCache"; // apenas cache local para exibir rápido, a fonte real é o Firestore
-
     var uidAtual = null;
-    var perfilAtual = { nome: "", bio: "", avatar: "👤" };
+    // Identidade fixa e anônima para curtidas/comentários — sem cadastro de perfil.
+    var perfilAtual = { nome: "Leitor", bio: "", avatar: "👤" };
     var listenersComentarios = {}; // postId -> função de cancelamento do onSnapshot
 
     function fb() { return window.__fb; }
@@ -1990,123 +1884,11 @@ Além de bonitos, os panos são ótimos para o dia a dia. Você pode usar para s
         els.forEach(function (el) { el.textContent = mensagem; });
     }
 
-    // ---------- PERFIL ----------
-
-    function carregarPerfilCacheLocal() {
-        try {
-            return JSON.parse(localStorage.getItem(PROFILE_KEY_LOCAL)) || { nome: "", bio: "", avatar: "👤" };
-        } catch (e) {
-            return { nome: "", bio: "", avatar: "👤" };
-        }
-    }
-
-    function salvarPerfilCacheLocal(perfil) {
-        try {
-            localStorage.setItem(PROFILE_KEY_LOCAL, JSON.stringify(perfil));
-        } catch (e) { /* silencioso */ }
-    }
-
-    function atualizarPerfilNaTela() {
-        var nome = perfilAtual.nome || "Perfil";
-
-        var nomeTopo = document.getElementById("perfilNomeTopo");
-        if (nomeTopo) nomeTopo.textContent = nome;
-
-        document.querySelectorAll(".cc-nome-inline").forEach(function (el) {
-            el.textContent = perfilAtual.nome || "defina seu nome";
-        });
-        document.querySelectorAll(".cc-avatar-inline").forEach(function (el) {
-            el.textContent = perfilAtual.avatar || "👤";
-        });
-    }
-
-    async function carregarPerfilDoFirestore() {
-        // Mostra o cache local instantaneamente, evitando tela "vazia" enquanto a rede responde
-        perfilAtual = carregarPerfilCacheLocal();
-        atualizarPerfilNaTela();
-
-        var usuario = await window.__fbUsuarioPronto;
-        uidAtual = usuario.uid;
-
-        var refUsuario = fb().doc(fb().db, "usuarios", uidAtual);
-        try {
-            var snap = await fb().getDoc(refUsuario);
-            if (snap.exists()) {
-                var dados = snap.data();
-                perfilAtual = {
-                    nome: dados.nome || "",
-                    bio: dados.bio || "",
-                    avatar: dados.avatar || "👤"
-                };
-                salvarPerfilCacheLocal(perfilAtual);
-            }
-        } catch (e) {
-            console.error("Não foi possível carregar o perfil no Firestore:", e);
-            mostrarStatusConexao("⚠️ Sem conexão com o servidor no momento.");
-        }
-
-        atualizarPerfilNaTela();
-    }
-
-    window.abrirPerfil = function () {
-        document.getElementById("perfilNomeInput").value = perfilAtual.nome || "";
-        document.getElementById("perfilBioInput").value = perfilAtual.bio || "";
-        document.getElementById("perfilAvatarInput").value = perfilAtual.avatar || "👤";
-        document.getElementById("perfilModal").classList.add("aberto");
-        document.getElementById("perfilNomeInput").focus();
-    };
-
-    window.fecharPerfil = function () {
-        document.getElementById("perfilModal").classList.remove("aberto");
-    };
-
-    window.fecharPerfilFora = function (event) {
-        if (event.target.id === "perfilModal") fecharPerfil();
-    };
-
-    window.salvarPerfil = async function () {
-        var nome = document.getElementById("perfilNomeInput").value.trim();
-        var bio = document.getElementById("perfilBioInput").value.trim();
-        var avatar = document.getElementById("perfilAvatarInput").value.trim() || "👤";
-
-        if (!nome) {
-            alert("Digite seu nome.");
-            document.getElementById("perfilNomeInput").focus();
-            return;
-        }
-
-        var botaoSalvar = document.querySelector(".perfil-salvar");
-        if (botaoSalvar) { botaoSalvar.disabled = true; botaoSalvar.textContent = "Salvando..."; }
-
-        try {
-            var usuario = await window.__fbUsuarioPronto;
-            uidAtual = usuario.uid;
-            var refUsuario = fb().doc(fb().db, "usuarios", uidAtual);
-            await fb().setDoc(refUsuario, {
-                nome: nome,
-                bio: bio,
-                avatar: avatar,
-                atualizadoEm: fb().serverTimestamp()
-            }, { merge: true });
-
-            perfilAtual = { nome: nome, bio: bio, avatar: avatar };
-            salvarPerfilCacheLocal(perfilAtual);
-            atualizarPerfilNaTela();
-            fecharPerfil();
-        } catch (e) {
-            console.error("Erro ao salvar perfil:", e);
-            alert("Não foi possível salvar o perfil agora. Verifique sua conexão e tente de novo.");
-        } finally {
-            if (botaoSalvar) { botaoSalvar.disabled = false; botaoSalvar.textContent = "Salvar perfil"; }
-        }
-    };
-
+    // ---------- IDENTIDADE (fixa, sem cadastro de perfil) ----------
+    // perfilAtual já vem definido como { nome: "Leitor", avatar: "👤" } acima.
+    // Toda curtida/comentário usa essa identidade anônima automaticamente,
+    // sem exigir nenhum cadastro do visitante.
     function exigirPerfil() {
-        if (!perfilAtual.nome) {
-            alert("Antes de comentar ou curtir, defina seu nome no perfil.");
-            window.abrirPerfil();
-            return false;
-        }
         return true;
     }
 
@@ -2553,7 +2335,6 @@ Além de bonitos, os panos são ótimos para o dia a dia. Você pode usar para s
             }
         });
 
-        await carregarPerfilDoFirestore();
         escutarTodosOsPosts();
     }
 
